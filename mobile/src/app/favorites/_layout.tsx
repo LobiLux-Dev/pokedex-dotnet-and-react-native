@@ -18,7 +18,7 @@ export default function FavoritesLayout() {
     >
       <Stack.Screen
         name="index"
-        options={{ title: 'Favoritos', headerLargeTitle: true }}
+        options={{ title: 'Favoritos' }}
       />
       <Stack.Screen
         name="pokemon/[name]"

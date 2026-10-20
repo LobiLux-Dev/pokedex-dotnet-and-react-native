@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useIsFocused, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -18,19 +18,19 @@ import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 
 export default function SeafoodScreen() {
   const router = useRouter();
+  const isFocused = useIsFocused();
+
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [sustainability, setSustainability] = useState<string | null>(null);
   const [maxPrepMinutes, setMaxPrepMinutes] = useState<number | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
-  const facets = useSeafoodFacets();
-  const query = useSeafood({
-    search: debouncedSearch,
-    category,
-    sustainability,
-    maxPrepMinutes,
-  });
+  const facets = useSeafoodFacets(isFocused);
+  const query = useSeafood(
+    { search: debouncedSearch, category, sustainability, maxPrepMinutes },
+    isFocused,
+  );
 
   const items = useMemo(
     () => query.data?.pages.flatMap((page) => page.items) ?? [],
@@ -95,111 +95,119 @@ export default function SeafoodScreen() {
     setMaxPrepMinutes(null);
   };
 
-  if (query.isPending && items.length === 0) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color={palette.primary} />
-        <Text style={styles.loadingLabel}>Cargando la guía de mariscos…</Text>
-      </View>
-    );
-  }
-
-  if (query.isError && items.length === 0) {
-    return (
-      <ErrorState
-        message={query.error instanceof Error ? query.error.message : 'Error desconocido.'}
-        onRetry={() => query.refetch()}
-      />
-    );
-  }
+  const showInitialLoading = !isFocused || (query.isPending && items.length === 0);
+  const showError = query.isError && items.length === 0;
 
   return (
-    <FlatList
-      data={items}
-      keyExtractor={(item) => String(item.id)}
-      contentContainerStyle={styles.listContent}
-      renderItem={({ item }) => (
-        <SeafoodCard
-          entry={item}
-          onPress={() =>
-            router.push({ pathname: '/seafood/[slug]', params: { slug: item.slug } })
+    <View style={styles.screen}>
+      <View style={styles.toolbar}>
+        <CatalogToolbar
+          search={search}
+          onSearchChange={setSearch}
+          placeholder="Buscar pescado, marisco o Pokémon"
+          searchLabel="Buscar mariscos"
+          groups={groups}
+          onClearAll={clearAll}
+        />
+
+        <View style={styles.summaryRow}>
+          <Text style={styles.summary}>
+            {hasFilters
+              ? `${totalItems} ${totalItems === 1 ? 'entrada' : 'entradas'}`
+              : `${totalItems} entradas`}
+          </Text>
+          {query.isFetchingNextPage ? (
+            <ActivityIndicator size="small" color={palette.primary} />
+          ) : null}
+        </View>
+      </View>
+
+      {showInitialLoading ? (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color={palette.primary} />
+          <Text style={styles.loadingLabel}>Cargando la guía de mariscos…</Text>
+        </View>
+      ) : showError ? (
+        <ErrorState
+          message={query.error instanceof Error ? query.error.message : 'Error desconocido.'}
+          onRetry={() => query.refetch()}
+        />
+      ) : (
+        <FlatList
+          style={styles.list}
+          data={items}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={styles.listContent}
+          renderItem={({ item }) => (
+            <SeafoodCard
+              entry={item}
+              onPress={() =>
+                router.push({ pathname: '/seafood/[slug]', params: { slug: item.slug } })
+              }
+            />
+          )}
+          onEndReached={() => {
+            if (query.hasNextPage && !query.isFetchingNextPage) {
+              query.fetchNextPage();
+            }
+          }}
+          onEndReachedThreshold={0.6}
+          refreshControl={
+            <RefreshControl
+              refreshing={query.isRefetching && items.length > 0}
+              onRefresh={() => query.refetch()}
+              tintColor={palette.primary}
+            />
           }
+          ListEmptyComponent={
+            <EmptyState
+              title="No hay mariscos que coincidan"
+              message="Prueba con otro nombre, categoría o nivel de sostenibilidad."
+              icon="fish-outline"
+            />
+          }
+          ListFooterComponent={
+            items.length > 0 && !query.hasNextPage ? (
+              <Text style={styles.footer}>Fin de la guía</Text>
+            ) : null
+          }
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
         />
       )}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
-      onEndReached={() => {
-        if (query.hasNextPage && !query.isFetchingNextPage) {
-          query.fetchNextPage();
-        }
-      }}
-      onEndReachedThreshold={0.6}
-      refreshControl={
-        <RefreshControl
-          refreshing={query.isRefetching && items.length > 0}
-          onRefresh={() => query.refetch()}
-          tintColor={palette.primary}
-        />
-      }
-      ListHeaderComponent={
-        <View style={styles.header}>
-          <CatalogToolbar
-            search={search}
-            onSearchChange={setSearch}
-            placeholder="Buscar pescado, marisco o Pokémon"
-            searchLabel="Buscar mariscos"
-            groups={groups}
-            onClearAll={clearAll}
-          />
-
-          <View style={styles.summaryRow}>
-            <Text style={styles.summary}>
-              {hasFilters
-                ? `${totalItems} ${totalItems === 1 ? 'entrada' : 'entradas'}`
-                : `${totalItems} entradas`}
-            </Text>
-            {query.isFetchingNextPage ? (
-              <ActivityIndicator size="small" color={palette.primary} />
-            ) : null}
-          </View>
-        </View>
-      }
-      ListEmptyComponent={
-        <EmptyState
-          title="No hay mariscos que coincidan"
-          message="Prueba con otro nombre, categoría o nivel de sostenibilidad."
-          icon="fish-outline"
-        />
-      }
-      ListFooterComponent={
-        items.length > 0 && !query.hasNextPage ? (
-          <Text style={styles.footer}>Fin de la guía</Text>
-        ) : null
-      }
-      keyboardShouldPersistTaps="handled"
-    />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+  toolbar: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.sm,
+    gap: spacing.xs,
+    backgroundColor: palette.background,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: palette.border,
+  },
+  list: {
+    flex: 1,
+  },
   listContent: {
     paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
     paddingBottom: spacing.xxl,
     width: '100%',
     maxWidth: 760,
     alignSelf: 'center',
   },
-  separator: {
-    height: spacing.md,
-  },
-  header: {
-    gap: spacing.sm,
-    paddingTop: spacing.sm,
-    paddingBottom: spacing.md,
-  },
   summaryRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: spacing.xs,
   },
   summary: {
     fontSize: 13,

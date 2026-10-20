@@ -19,7 +19,7 @@ export default function PokedexLayout() {
     >
       <Stack.Screen
         name="index"
-        options={{ title: 'Pokédex', headerLargeTitle: true }}
+        options={{ title: 'Pokédex' }}
       />
       <Stack.Screen
         name="pokemon/[name]"

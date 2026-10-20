@@ -338,7 +338,7 @@ public sealed class PokeApiClient : IPokemonRepository
 
     private async Task<T?> GetJsonAsync<T>(string path, CancellationToken cancellationToken)
     {
-        using var response = await _httpClient.GetAsync(path, cancellationToken);
+        using var response = await SendAsync(path, cancellationToken);
 
         if (response.StatusCode == HttpStatusCode.NotFound)
         {
@@ -359,6 +359,28 @@ public sealed class PokeApiClient : IPokemonRepository
         catch (JsonException ex)
         {
             throw new ExternalServiceException($"PokeAPI returned an invalid payload for '{path}'.", ex);
+        }
+    }
+
+    /// <summary>
+    /// Sends the request and turns the transport and resilience failures (timeouts, broken
+    /// circuits, DNS errors) into <see cref="ExternalServiceException"/> so the API answers
+    /// with a 502 instead of a 500.
+    /// </summary>
+    private async Task<HttpResponseMessage> SendAsync(string path, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await _httpClient.GetAsync(path, cancellationToken);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            // The client went away, nothing to report.
+            throw;
+        }
+        catch (Exception exception)
+        {
+            throw new ExternalServiceException($"PokeAPI request '{path}' failed.", exception);
         }
     }
 

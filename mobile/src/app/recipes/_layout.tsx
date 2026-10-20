@@ -18,7 +18,7 @@ export default function RecipesLayout() {
     >
       <Stack.Screen
         name="index"
-        options={{ title: 'Recetario', headerLargeTitle: true }}
+        options={{ title: 'Recetario' }}
       />
       <Stack.Screen
         name="[slug]"

@@ -31,6 +31,7 @@ interface CatalogToolbarProps {
 
 /**
  * Search field plus the filter chips shared by every catalogue of the app.
+ * It is rendered outside the list so it stays visible while the results scroll.
  */
 export function CatalogToolbar({
   search,
@@ -43,10 +44,12 @@ export function CatalogToolbar({
   const [expanded, setExpanded] = useState(false);
 
   const [primary, ...extra] = groups;
-  const activeCount = groups.reduce(
+  const activeFilterCount = groups.reduce(
     (total, group) => total + (group.selected === null ? 0 : 1),
     0,
   );
+  const hasActiveSearch = search.trim().length > 0;
+  const hasActiveState = activeFilterCount > 0 || hasActiveSearch;
 
   return (
     <View style={styles.container}>
@@ -65,39 +68,48 @@ export function CatalogToolbar({
         />
       ) : null}
 
-      {extra.length > 0 ? (
+      {extra.length > 0 || hasActiveState ? (
         <View style={styles.actionsRow}>
-          <Pressable
-            onPress={() => setExpanded((value) => !value)}
-            accessibilityRole="button"
-            accessibilityState={{ expanded }}
-            style={({ pressed }) => [
-              styles.filterButton,
-              activeCount > 0 && styles.filterButtonActive,
-              pressed && styles.pressed,
-            ]}
-          >
-            <Ionicons
-              name="options-outline"
-              size={15}
-              color={activeCount > 0 ? palette.onPrimary : palette.textSecondary}
-            />
-            <Text style={[styles.filterButtonLabel, activeCount > 0 && styles.filterButtonLabelActive]}>
-              Filtros{activeCount > 0 ? ` (${activeCount})` : ''}
-            </Text>
-            <Ionicons
-              name={expanded ? 'chevron-up' : 'chevron-down'}
-              size={15}
-              color={activeCount > 0 ? palette.onPrimary : palette.textSecondary}
-            />
-          </Pressable>
+          {extra.length > 0 ? (
+            <Pressable
+              onPress={() => setExpanded((value) => !value)}
+              accessibilityRole="button"
+              accessibilityState={{ expanded }}
+              style={({ pressed }) => [
+                styles.filterButton,
+                activeFilterCount > 0 && styles.filterButtonActive,
+                pressed && styles.pressed,
+              ]}
+            >
+              <Ionicons
+                name="options-outline"
+                size={15}
+                color={activeFilterCount > 0 ? palette.onPrimary : palette.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.filterButtonLabel,
+                  activeFilterCount > 0 && styles.filterButtonLabelActive,
+                ]}
+              >
+                Filtros{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
+              </Text>
+              <Ionicons
+                name={expanded ? 'chevron-up' : 'chevron-down'}
+                size={15}
+                color={activeFilterCount > 0 ? palette.onPrimary : palette.textSecondary}
+              />
+            </Pressable>
+          ) : null}
 
-          {activeCount > 0 ? (
+          {hasActiveState ? (
             <Pressable
               onPress={onClearAll}
               accessibilityRole="button"
+              accessibilityLabel="Limpiar búsqueda y filtros"
               style={({ pressed }) => [styles.clearButton, pressed && styles.pressed]}
             >
+              <Ionicons name="close-circle" size={15} color={palette.danger} />
               <Text style={styles.clearLabel}>Limpiar</Text>
             </Pressable>
           ) : null}
@@ -138,10 +150,12 @@ function ChipRow({
     >
       {options.map((option) => {
         const isSelected = option.value === selected;
+
         return (
           <Pressable
             key={option.value ?? '__all__'}
-            onPress={() => onSelect(option.value)}
+            // Tapping the active chip clears the filter, so it can always be removed.
+            onPress={() => onSelect(isSelected && option.value !== null ? null : option.value)}
             accessibilityRole="button"
             accessibilityState={{ selected: isSelected }}
             style={({ pressed }) => [
@@ -219,9 +233,13 @@ const styles = StyleSheet.create({
     color: palette.onPrimary,
   },
   clearButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
     paddingHorizontal: spacing.md,
     height: 32,
-    justifyContent: 'center',
+    borderRadius: radius.pill,
+    backgroundColor: palette.primarySoft,
   },
   clearLabel: {
     fontSize: 13,

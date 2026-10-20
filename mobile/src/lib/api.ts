@@ -17,8 +17,15 @@ import type {
 /** Port the .NET API listens on (see src/Pokedex.Api/Properties/launchSettings.json). */
 const DEFAULT_PORT = 5080;
 
-const PROBE_TIMEOUT_MS = 2500;
+const PROBE_TIMEOUT_MS = 800;
 const REQUEST_TIMEOUT_MS = 20000;
+
+// Kept in sync by the network status hook so a request fails fast when the device is offline.
+let networkAvailable = true;
+
+export function setNetworkAvailable(value: boolean): void {
+  networkAvailable = value;
+}
 
 /**
  * Candidate hosts, ordered by likelihood:
@@ -88,6 +95,12 @@ export function resolveBaseUrl(): Promise<string> {
     resolving = (async () => {
       const candidates = candidateBaseUrls();
 
+      // Offline: do not waste time probing, the request will fail fast anyway.
+      if (!networkAvailable) {
+        resolvedBaseUrl = candidates[0] ?? `http://localhost:${DEFAULT_PORT}`;
+        return resolvedBaseUrl;
+      }
+
       for (const candidate of candidates) {
         if (await probe(candidate)) {
           resolvedBaseUrl = candidate;
@@ -114,6 +127,10 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string): Promise<T> {
+  if (!networkAvailable) {
+    throw new ApiError('Sin conexión a internet. Revisa tu red y vuelve a intentarlo.');
+  }
+
   const baseUrl = await resolveBaseUrl();
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);

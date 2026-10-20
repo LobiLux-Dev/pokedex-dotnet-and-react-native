@@ -18,7 +18,7 @@ export default function SeafoodLayout() {
     >
       <Stack.Screen
         name="index"
-        options={{ title: 'Seafood', headerLargeTitle: true }}
+        options={{ title: 'Seafood' }}
       />
       <Stack.Screen
         name="[slug]"

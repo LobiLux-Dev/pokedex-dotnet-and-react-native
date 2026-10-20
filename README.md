@@ -81,9 +81,15 @@ Los errores usan **RFC 7807** (`application/problem+json`): 404 para Pokémon in
 - **Catálogo en memoria**: PokeAPI no ofrece búsqueda por nombre ni filtro por tipo, así que la
   API construye un índice (los ~1351 Pokémon y los 20 tipos, obtenidos de `/type/{name}`) y lo cachea
   12 h. Así la búsqueda y el filtrado son instantáneos y no se hacen N peticiones al listar.
+- **Precalentado en arranque**: `CatalogWarmupService` construye en segundo plano el índice de tipos,
+  el catálogo y los catálogos semilla. La primera petición real pasa de ~3 s a ~15 ms
+  (`Warmup:Enabled` en `appsettings.json`).
+- **Transporte**: respuestas comprimidas (Brotli/Gzip) y `Cache-Control: public, max-age=300` en los
+  GET del catálogo, para que la app y los proxies no repitan descargas.
 - **Caché `HybridCache`**: cada Pokémon, especie, movimiento y cadena evolutiva se cachea por separado.
 - **Resiliencia**: `AddStandardResilienceHandler` aplica reintentos con backoff exponencial,
-  *circuit breaker* y límites de tiempo en cada petición a PokeAPI.
+  *circuit breaker* y límites de tiempo en cada petición a PokeAPI. Los fallos de transporte
+  (timeouts, circuit breaker, DNS) se traducen a `ExternalServiceException` → **502**, no 500.
 - **Errores**: los errores de negocio (`PokemonNotFoundException`) y de infraestructura
   (`ExternalServiceException`) se traducen a `ProblemDetails` en `GlobalExceptionHandler`.
 
@@ -105,7 +111,7 @@ Elige plataforma con `npx expo start --android | --ios | --web`, o pulsa `a` / `
 
 ### Apuntar la app a la API
 
-La app **detecta sola** el host correcto (probando `/health` en este orden):
+La app **detecta sola** el host correcto (probando `/health` en este orden, con 800 ms por candidato):
 
 1. `EXPO_PUBLIC_API_URL` si está definida (copia `.env.example` a `.env`).
 2. El host del servidor de desarrollo de Expo → sirve en un **dispositivo físico** por Wi-Fi.
@@ -121,6 +127,8 @@ EXPO_PUBLIC_API_URL=http://192.168.1.50:5080
 ### Funcionalidades
 
 - **Pokédex**: listado paginado con scroll infinito, búsqueda por nombre o número y filtro por tipo.
+  El buscador y los filtros son una **barra fija** que no se pierde al hacer scroll; se filtran en la
+  misma pantalla contra la API y el chip activo se deselecciona al volver a pulsarlo.
 - **Ficha**: arte oficial, datos básicos, descripción (español si PokeAPI la tiene), estadísticas,
   habilidades, cadena evolutiva y movimientos agrupados por método de aprendizaje.
 - **Recetario**: 22 recetas inspiradas en Pokémon (ingredientes, pasos, dificultad, alérgenos y
@@ -129,9 +137,18 @@ EXPO_PUBLIC_API_URL=http://192.168.1.50:5080
   preparación, sabor, maridaje y valor nutricional) con búsqueda y filtros por categoría,
   sostenibilidad y tiempo de preparación.
 - **Favoritos**: se guardan en el dispositivo con `AsyncStorage` y aparecen en su propia pestaña.
+- **Sin red**: si el dispositivo arranca sin conexión, la app no deja entrar y muestra un mensaje de
+  error con opción de reintentar; se desbloquea sola en cuanto vuelve la conexión.
 
 Las cuatro secciones comparten el mismo componente de búsqueda y filtros (`CatalogToolbar`), y
 todos los datos se sirven desde la API .NET (nunca directamente de PokeAPI).
+
+### Rendimiento del arranque
+
+- Las native tabs montan todas las pantallas a la vez, así que cada sección activa sus consultas
+  **solo cuando se visita por primera vez** (`useIsFocused`). Al arrancar se hacen 2 peticiones
+  (tipos + primera página) en lugar de 6.
+- La API precalienta sus cachés en segundo plano, de modo que esas peticiones responden en ~15 ms.
 
 ### Datasets editoriales
 
@@ -186,7 +203,8 @@ dotnet test
 query, mapeo) y la API completa vía `WebApplicationFactory` (enrutado, serialización y
 `ProblemDetails`), con el repositorio de PokeAPI sustituido por un doble en memoria.
 
-> Con las secciones nuevas son **55 tests**: Recetario, Seafood y sus endpoints.
+> Con las secciones nuevas son **60 tests**: Recetario, Seafood, sus endpoints y el transporte
+> (compresión, caché y bloqueo sin red).
 
 ---
 

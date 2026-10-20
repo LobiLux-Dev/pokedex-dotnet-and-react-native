@@ -1,4 +1,6 @@
+using System.IO.Compression;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.ResponseCompression;
 using Pokedex.Api.Middleware;
 using Pokedex.Application.Abstractions;
 using Pokedex.Application.Services;
@@ -18,6 +20,29 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+builder.Services.AddResponseCompression(options =>
+{
+    // The catalogue payloads are JSON and can be compressed a lot.
+    options.EnableForHttps = true;
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+    [
+        "application/json",
+        "application/problem+json"
+    ]);
+});
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
 
 builder.Services.AddCors(options =>
 {
@@ -45,8 +70,10 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
+app.UseResponseCompression();
 app.UseExceptionHandler();
 app.UseCors(CorsPolicy.Name);
+app.UseMiddleware<CacheHeadersMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

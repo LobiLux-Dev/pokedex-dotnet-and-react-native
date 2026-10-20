@@ -8,6 +8,7 @@ using Pokedex.Application.Abstractions;
 using Pokedex.Infrastructure.Catalog;
 using Pokedex.Infrastructure.Options;
 using Pokedex.Infrastructure.PokeApi;
+using Pokedex.Infrastructure.Warmup;
 
 namespace Pokedex.Infrastructure;
 
@@ -64,6 +65,8 @@ public static class DependencyInjection
 
         services.AddScoped<IRecipeRepository, RecipeRepository>();
         services.AddScoped<ISeafoodRepository, SeafoodRepository>();
+
+        services.AddHostedService<CatalogWarmupService>();
 
         return services;
     }

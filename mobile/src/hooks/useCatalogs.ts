@@ -19,7 +19,7 @@ export interface RecipeFilters {
   maxMinutes: number | null;
 }
 
-export function useRecipes(filters: RecipeFilters) {
+export function useRecipes(filters: RecipeFilters, enabled = true) {
   return useInfiniteQuery({
     queryKey: ['recipes', 'list', filters],
     initialPageParam: 1,
@@ -34,6 +34,7 @@ export function useRecipes(filters: RecipeFilters) {
       }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    enabled,
   });
 }
 
@@ -45,11 +46,12 @@ export function useRecipe(idOrSlug: string | undefined) {
   });
 }
 
-export function useRecipeFacets() {
+export function useRecipeFacets(enabled = true) {
   return useQuery({
     queryKey: ['recipes', 'facets'],
     queryFn: fetchRecipeFacets,
     staleTime: 60 * 60 * 1000,
+    enabled,
   });
 }
 
@@ -60,7 +62,7 @@ export interface SeafoodFilters {
   maxPrepMinutes: number | null;
 }
 
-export function useSeafood(filters: SeafoodFilters) {
+export function useSeafood(filters: SeafoodFilters, enabled = true) {
   return useInfiniteQuery({
     queryKey: ['seafood', 'list', filters],
     initialPageParam: 1,
@@ -75,6 +77,7 @@ export function useSeafood(filters: SeafoodFilters) {
       }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    enabled,
   });
 }
 
@@ -86,10 +89,11 @@ export function useSeafoodEntry(idOrSlug: string | undefined) {
   });
 }
 
-export function useSeafoodFacets() {
+export function useSeafoodFacets(enabled = true) {
   return useQuery({
     queryKey: ['seafood', 'facets'],
     queryFn: fetchSeafoodFacets,
     staleTime: 60 * 60 * 1000,
+    enabled,
   });
 }

@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useIsFocused, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -9,8 +9,8 @@ import {
   View,
 } from 'react-native';
 
-import { PokemonCard } from '@/components/PokemonCard';
 import { CatalogToolbar, type FilterGroup } from '@/components/CatalogToolbar';
+import { PokemonCard } from '@/components/PokemonCard';
 import { EmptyState, ErrorState } from '@/components/StateViews';
 import { palette, spacing } from '@/constants/theme';
 import { typeLabel } from '@/constants/typeColors';
@@ -20,12 +20,14 @@ import type { PokemonSummary } from '@/lib/types';
 
 export default function PokemonListScreen() {
   const router = useRouter();
+  const isFocused = useIsFocused();
+
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
-  const typesQuery = usePokemonTypes();
-  const listQuery = usePokemonList(debouncedSearch, selectedType);
+  const typesQuery = usePokemonTypes(isFocused);
+  const listQuery = usePokemonList(debouncedSearch, selectedType, isFocused);
 
   const items = useMemo(
     () => listQuery.data?.pages.flatMap((page) => page.items) ?? [],
@@ -63,109 +65,118 @@ export default function PokemonListScreen() {
     router.push({ pathname: '/(pokedex)/pokemon/[name]', params: { name: pokemon.name } });
   };
 
-  const isInitialLoading = listQuery.isPending && items.length === 0;
+  const showInitialLoading = !isFocused || (listQuery.isPending && items.length === 0);
+  const showError = listQuery.isError && items.length === 0;
   const isRefreshing = listQuery.isRefetching && items.length > 0;
 
-  if (isInitialLoading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color={palette.primary} />
-        <Text style={styles.loadingLabel}>Cargando el Pokédex…</Text>
-      </View>
-    );
-  }
-
-  if (listQuery.isError && items.length === 0) {
-    return (
-      <ErrorState
-        message={
-          listQuery.error instanceof Error
-            ? listQuery.error.message
-            : 'Error desconocido al contactar con la API.'
-        }
-        onRetry={() => listQuery.refetch()}
-      />
-    );
-  }
-
   return (
-    <FlatList
-      data={items}
-      keyExtractor={(item) => String(item.id)}
-      numColumns={2}
-      columnWrapperStyle={styles.column}
-      contentContainerStyle={styles.listContent}
-      renderItem={({ item }) => (
-        <PokemonCard pokemon={item} onPress={() => openDetail(item)} />
-      )}
-      onEndReached={() => {
-        if (listQuery.hasNextPage && !listQuery.isFetchingNextPage) {
-          listQuery.fetchNextPage();
-        }
-      }}
-      onEndReachedThreshold={0.6}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshing}
-          onRefresh={() => listQuery.refetch()}
-          tintColor={palette.primary}
+    <View style={styles.screen}>
+      {/* Fixed toolbar: always visible, never scrolled away by the list. */}
+      <View style={styles.toolbar}>
+        <CatalogToolbar
+          search={search}
+          onSearchChange={setSearch}
+          placeholder="Buscar por nombre o número"
+          searchLabel="Buscar Pokémon"
+          groups={filterGroups}
+          onClearAll={clearFilters}
         />
-      }
-      ListHeaderComponent={
-        <View style={styles.header}>
-          <CatalogToolbar
-            search={search}
-            onSearchChange={setSearch}
-            placeholder="Buscar por nombre o número"
-            searchLabel="Buscar Pokémon"
-            groups={filterGroups}
-            onClearAll={clearFilters}
-          />
 
-          <View style={styles.summaryRow}>
-            <Text style={styles.summary}>
-              {hasFilters
-                ? `${totalItems} ${totalItems === 1 ? 'resultado' : 'resultados'}`
-                : `${totalItems} Pokémon`}
-            </Text>
+        <View style={styles.summaryRow}>
+          <Text style={styles.summary}>
+            {hasFilters
+              ? `${totalItems} ${totalItems === 1 ? 'resultado' : 'resultados'}`
+              : `${totalItems} Pokémon`}
+          </Text>
 
-            {listQuery.isFetchingNextPage ? (
-              <ActivityIndicator size="small" color={palette.primary} />
-            ) : null}
-          </View>
+          {listQuery.isFetchingNextPage ? (
+            <ActivityIndicator size="small" color={palette.primary} />
+          ) : null}
         </View>
-      }
-      ListEmptyComponent={
-        <EmptyState
-          title="No hay coincidencias"
-          message="Prueba con otro nombre, número o tipo."
-          icon="search-outline"
+      </View>
+
+      {showInitialLoading ? (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color={palette.primary} />
+          <Text style={styles.loadingLabel}>Cargando el Pokédex…</Text>
+        </View>
+      ) : showError ? (
+        <ErrorState
+          message={
+            listQuery.error instanceof Error
+              ? listQuery.error.message
+              : 'Error desconocido al contactar con la API.'
+          }
+          onRetry={() => listQuery.refetch()}
         />
-      }
-      ListFooterComponent={
-        items.length > 0 && !listQuery.hasNextPage ? (
-          <Text style={styles.footer}>Fin del catálogo</Text>
-        ) : null
-      }
-      keyboardShouldPersistTaps="handled"
-      removeClippedSubviews={false}
-    />
+      ) : (
+        <FlatList
+          style={styles.list}
+          data={items}
+          keyExtractor={(item) => String(item.id)}
+          numColumns={2}
+          columnWrapperStyle={styles.column}
+          contentContainerStyle={styles.listContent}
+          renderItem={({ item }) => (
+            <PokemonCard pokemon={item} onPress={() => openDetail(item)} />
+          )}
+          onEndReached={() => {
+            if (listQuery.hasNextPage && !listQuery.isFetchingNextPage) {
+              listQuery.fetchNextPage();
+            }
+          }}
+          onEndReachedThreshold={0.6}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={() => listQuery.refetch()}
+              tintColor={palette.primary}
+            />
+          }
+          ListEmptyComponent={
+            <EmptyState
+              title="No hay coincidencias"
+              message="Prueba con otro nombre, número o tipo."
+              icon="search-outline"
+            />
+          }
+          ListFooterComponent={
+            items.length > 0 && !listQuery.hasNextPage ? (
+              <Text style={styles.footer}>Fin del catálogo</Text>
+            ) : null
+          }
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+        />
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+  toolbar: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.sm,
+    gap: spacing.xs,
+    backgroundColor: palette.background,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: palette.border,
+  },
+  list: {
+    flex: 1,
+  },
   listContent: {
     paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
     paddingBottom: spacing.xxl,
   },
   column: {
     gap: spacing.md,
     marginBottom: spacing.md,
-  },
-  header: {
-    gap: spacing.sm,
-    paddingTop: spacing.sm,
-    paddingBottom: spacing.md,
   },
   summaryRow: {
     flexDirection: 'row',
