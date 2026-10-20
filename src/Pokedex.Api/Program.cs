@@ -39,6 +39,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<IPokemonService, PokemonService>();
+builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<ISeafoodService, SeafoodService>();
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();

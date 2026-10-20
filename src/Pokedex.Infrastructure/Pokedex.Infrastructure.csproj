@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Pokedex.Domain\Pokedex.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Seed\*.json" />
+  </ItemGroup>
+
 </Project>

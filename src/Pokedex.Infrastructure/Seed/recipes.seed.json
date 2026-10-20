@@ -1,0 +1,771 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "slug": "arroz-de-picnic-pikachu",
+      "title": "Arroz de picnic Pikachu",
+      "summary": "Arroz aromático con verduras de colores, ideal para picnics al aire libre y fácil de llevar en un táper.",
+      "description": "El arroz de picnic Pikachu se prepara en una sola olla y se lleva igual de bien caliente que frío. El arroz redondo absorbe el aroma de las verduras y el toque final de la soja, así que resulta perfecto para compartir al aire libre.\n\nLa idea nació de las meriendas caseras de la región de Kanto, donde se mezclaba el arroz del día anterior con la huerta y un aliño sencillo de soja. La versión de hoy se cuece con caldo de verduras y se termina con cebollino fresco y un hilo de aceite de sésamo.",
+      "category": "Plato principal",
+      "difficulty": "Fácil",
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "servings": 4,
+      "tags": ["arroz", "vegetariano", "familiar"],
+      "allergens": ["gluten"],
+      "tips": "Sube el fuego al final y remueve con cuidado para que el arroz quede suelto y no pegado.",
+      "pokemon": [
+        { "id": 25, "name": "pikachu" }
+      ],
+      "ingredients": [
+        { "name": "Arroz redondo", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Caldo de verduras", "quantity": "600", "unit": "ml", "optional": false },
+        { "name": "Zanahoria", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Pimiento verde", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Cebolla", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Salsa de soja", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Aceite de sésamo", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Cebollino fresco picado", "quantity": "1", "unit": "cdta", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar las verduras", "description": "Lava y pela la zanahoria, el pimiento y la cebolla. Córtalos en dados pequeños y deja el cebollino picado a un lado.", "durationMinutes": 8 },
+        { "order": 2, "title": "Sofreír la base", "description": "Calienta una sartén amplia con un hilo de aceite y sofríe la cebolla a fuego medio hasta que esté transparente, sin dorarse.", "durationMinutes": 4 },
+        { "order": 3, "title": "Añadir el arroz", "description": "Incorpora el arroz y remueve durante un par de minutos para que cada grano se impregne del aroma de la cebolla y del caldo.", "durationMinutes": 2 },
+        { "order": 4, "title": "Cocer a fuego medio", "description": "Vierte el caldo caliente, añade las verduras y la soja, tapa y deja cocer hasta que el arroz haya absorbido todo el líquido.", "durationMinutes": 16 },
+        { "order": 5, "title": "Reposo y emplatado", "description": "Retira del fuego y deja reposar cinco minutos con la tapa puesta. Espolvorea el cebollino, aliña con el aceite de sésamo y reparte en boles.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "sopa-de-miso-con-pescado-de-seaking",
+      "title": "Sopa de miso con pescado de Seaking",
+      "summary": "Sopa japonesa de miso con pescado blanco, verduras y tofu, reconfortante y lista en media hora.",
+      "description": "Esta sopa de miso es un plato de cuchara muy equilibrado: el miso aporta profundidad y el pescado blanco ligereza y proteína. El tofu y las verduras de raíz le dan cuerpo sin pasarse de pesado.\n\nEl caldo se prepara al estilo de las cocinas de la costa de Asia Oriental, con un fondo de alga wakame y un toque final de guindilla. El miso se añade fuera del fuego para no perder sus aromas, y el pescado se cuece justo antes de servir.",
+      "category": "Entrante",
+      "difficulty": "Fácil",
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "servings": 4,
+      "tags": ["sopa", "pescado", "japonesa"],
+      "allergens": ["pescado", "soja"],
+      "tips": "Añade el miso fuera del fuego y sin hervir, o perderás el sabor.",
+      "pokemon": [
+        { "id": 119, "name": "seaking" },
+        { "id": 118, "name": "goldeen" }
+      ],
+      "ingredients": [
+        { "name": "Lomo de pescado blanco", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Pasta de miso", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Tofu firme", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Zanahoria", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Puerro", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Cebolla morada", "quantity": "1/2", "unit": "unidad", "optional": false },
+        { "name": "Alga wakame seca", "quantity": "10", "unit": "g", "optional": false },
+        { "name": "Agua", "quantity": "1000", "unit": "ml", "optional": false },
+        { "name": "Guindilla", "quantity": "1", "unit": "unidad", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar el caldo base", "description": "Remoja el alga wakame en el agua caliente durante diez minutos. Pela la zanahoria y el puerro y córtalos en rodajas finas.", "durationMinutes": 10 },
+        { "order": 2, "title": "Cocer las verduras", "description": "Calienta el agua con el alga, añade la zanahoria, el puerro y la cebolla. Cocina a fuego medio hasta que las verduras estén tiernas.", "durationMinutes": 12 },
+        { "order": 3, "title": "Añadir el tofu y el pescado", "description": "Incorpora el tofu en dados y el pescado en lomos. Deja cocer cuatro minutos sin remover demasiado para que el pescado no se deshaga.", "durationMinutes": 5 },
+        { "order": 4, "title": "Aliñar con miso", "description": "Retira el caldo del fuego, disuelve el miso en una taza del líquido templado y vuelve a verterlo en la olla. Remueve con cuidado y prueba el sabor.", "durationMinutes": 3 }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "ensalada-crujiente-de-slowking",
+      "title": "Ensalada crujiente de Slowking",
+      "summary": "Ensalada de hojas, manzana y nueces con un aliño de yogur y mostaza, fresca y aterciopelada.",
+      "description": "Una ensalada de contraste: el crujiente de la manzana y las nueces frente a la suavidad del aliño de yogur. El conjunto resulta ligero pero con suficiente cuerpo para abrir una comida completa.\n\nEl aliño se prepara batiendo el yogur con la mostaza, la miel y el vinagre, y emulsionando al final el aceite de oliva. La ensalada se monta en el momento de servir para que las hojas no pierdan su punto.",
+      "category": "Entrante",
+      "difficulty": "Fácil",
+      "prepMinutes": 20,
+      "cookMinutes": 5,
+      "servings": 4,
+      "tags": ["ensalada", "fresco", "ligero"],
+      "allergens": ["lácteos", "frutos secos"],
+      "tips": "Monta la ensalada en el último momento para que las hojas no se ablanden.",
+      "pokemon": [
+        { "id": 199, "name": "slowking" },
+        { "id": 79, "name": "slowpoke" }
+      ],
+      "ingredients": [
+        { "name": "Hojas de lechuga variadas", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Manzana verde", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Nueces peladas", "quantity": "50", "unit": "g", "optional": false },
+        { "name": "Yogur griego", "quantity": "100", "unit": "g", "optional": false },
+        { "name": "Mostaza de Dijon", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Miel", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Aceite de oliva virgen extra", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Vinagre de sidra", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Sal y pimienta", "quantity": "al gusto", "unit": "", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar las hojas", "description": "Lava las hojas de lechuga, escúrrelas bien y córtalas en trozos irregulares. Secar bien la lechuga evita que el aliño se deslice.", "durationMinutes": 8 },
+        { "order": 2, "title": "Cortar la manzana", "description": "Pela la manzana, córtala en medias lunas finas y remójala unos minutos en agua con un chorrito de vinagre para que no se oxide.", "durationMinutes": 6 },
+        { "order": 3, "title": "Preparar el aliño", "description": "Bate el yogur con la mostaza, la miel y el vinagre. Añade el aceite en hilo sin dejar de batir hasta que emulsione y sazona con sal y pimienta.", "durationMinutes": 5 },
+        { "order": 4, "title": "Montar la ensalada", "description": "Mezcla las hojas con la manzana escurrida, añade las nueces troceadas y riega con el aliño justo antes de servir.", "durationMinutes": 6 }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "pizza-de-carpa-de-magikarp",
+      "title": "Pizza de carpa de Magikarp",
+      "summary": "Masa fina y crujiente con lomo de carpa, cebolla morada, tomate cherry y eneldo.",
+      "description": "Una pizza de mar con alma: la carpa se sofríe brevemente con cebolla morada antes de cubrir la masa, de modo que el pescado llega a la pizza ya cocinado y con sabor.\n\nLa masa fermenta durante un día largo en la nevera, lo que da un borde aireado y muy crujiente. El horno a máxima temperatura es clave para conseguir esa base de pizza con manchas tostadas y un centro jugoso.",
+      "category": "Plato principal",
+      "difficulty": "Media",
+      "prepMinutes": 25,
+      "cookMinutes": 15,
+      "servings": 4,
+      "tags": ["pizza", "pescado", "horno"],
+      "allergens": ["gluten", "lácteos", "pescado"],
+      "tips": "Hornea la masa sobre una piedra o una chapa de metal bien caliente para un base crujiente.",
+      "pokemon": [
+        { "id": 129, "name": "magikarp" },
+        { "id": 130, "name": "gyarados" }
+      ],
+      "ingredients": [
+        { "name": "Harina de trigo", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Agua", "quantity": "190", "unit": "ml", "optional": false },
+        { "name": "Levadura seca", "quantity": "3", "unit": "g", "optional": false },
+        { "name": "Aceite de oliva", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Lomo de carpa", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Cebolla morada", "quantity": "1/2", "unit": "unidad", "optional": false },
+        { "name": "Queso mozzarella", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Tomate cherry", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Eneldo fresco", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Amasar la masa", "description": "Mezcla la harina, el agua y la levadura hasta formar una masa lisa. Trabaja dos minutos, cubre y deja reposar mientras preparas el topping.", "durationMinutes": 10 },
+        { "order": 2, "title": "Preparar el topping", "description": "Corta la carpa en dados, saltéala con la cebolla morada laminada y deja que se dore. Reserva los tomates cherry partidos por la mitad.", "durationMinutes": 12 },
+        { "order": 3, "title": "Estirar ysnapar", "description": "Estira la masa con las manos hasta dejar un disco fino, dejando un borde más alto. Coloca encima el mozzarella y reparte el topping.", "durationMinutes": 8 },
+        { "order": 4, "title": "Hornear", "description": "Hornea a máxima temperatura hasta que la base esté dorada y el queso burbujee. Termina con el eneldo picado y un hilo de aceite.", "durationMinutes": 10 }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "paella-de-kingler",
+      "title": "Paella de Kingler",
+      "summary": "Paella de mariscos con arroz bomba, cangrejo rey, gambas y un sofrito de pimentón dulce.",
+      "description": "Preparar una paella de verdad exige paciencia: el sofrito se hace a fuego bajo, el arroz reposa sin remover y la carne se sirve en el momento con un chorrito de limón.\n\nEl cangrejo rey aporta un sabor intenso y su carne dulce se reserva para el final, mezclada con el arroz ya cocido. El azafrán y el pimentón dulce dan color y aroma sin Dominionar el plato.",
+      "category": "Plato principal",
+      "difficulty": "Difícil",
+      "prepMinutes": 30,
+      "cookMinutes": 45,
+      "servings": 6,
+      "tags": ["arroz", "marisco", "paella"],
+      "allergens": ["marisco", "pescado"],
+      "tips": "Nunca remuevas el arroz durante la cocción, o la paella perderá el punto de arroz.",
+      "pokemon": [
+        { "id": 99, "name": "kingler" },
+        { "id": 98, "name": "krabby" }
+      ],
+      "ingredients": [
+        { "name": "Arroz bomba", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Caldo de marisco", "quantity": "1200", "unit": "ml", "optional": false },
+        { "name": "Cangrejos", "quantity": "600", "unit": "g", "optional": false },
+        { "name": "Gambas", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Pimiento rojo", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Pimiento verde", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Tomate triturado", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Azafrán", "quantity": "0,1", "unit": "g", "optional": false },
+        { "name": "Pimentón dulce", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Limón", "quantity": "1", "unit": "unidad", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar los mariscos", "description": "Limpia los cangrejos con un cepillo ycuece las gambas brevemente para que cambien de color. Reserva el caldo de cocción y la carne de las gambas.", "durationMinutes": 15 },
+        { "order": 2, "title": "Hacer el sofrito", "description": "Sofríe la cebolla y los pimientos con un buen chorro de aceite de oliva a fuego lento. Añade el tomate, el pimentón y el azafrán y remueve sin dejar de vigilar el color.", "durationMinutes": 12 },
+        { "order": 3, "title": "Cocer el arroz", "description": "Reparte el arroz sobre el sofrito, vierte el caldo caliente y deja cocer a fuego fuerte hasta que el caldo se reduzca y el arroz esté tierno.", "durationMinutes": 30 },
+        { "order": 4, "title": "Reposar y montar", "description": "Retira del fuego, cubre con un paño y deja reposar diez minutos. Mezcla la carne de cangrejo y gamba reserved y sirve con rodajas de limón.", "durationMinutes": 12 }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "tarta-de-queso-y-fresas-de-clefairy",
+      "title": "Tarta de queso y fresas de Clefairy",
+      "summary": "Tarta de queso cremosa con base de galleta y fresas frescas decorando la superficie.",
+      "description": "La tarta de queso de Clefairy es un postre de textura aterciopelada, ni demasiado denso ni demasiado líquido. La base de galleta aporta un contraste crujiente que sostiene el relleno sin que se desmorone.\n\nEl truco está en templar muy bien el queso crema y en hornear la tarta dentro de un molde con agua, para que el centro se cuaje de forma uniforme y no se agriete al enfriarse.",
+      "category": "Postre",
+      "difficulty": "Media",
+      "prepMinutes": 25,
+      "cookMinutes": 40,
+      "servings": 6,
+      "tags": ["postre", "queso", "fresa"],
+      "allergens": ["lácteos", "huevo", "gluten"],
+      "tips": "Hornea la tarta al baño maría para un centro liso y sin grietas.",
+      "pokemon": [
+        { "id": 35, "name": "clefairy" },
+        { "id": 52, "name": "meowth" }
+      ],
+      "ingredients": [
+        { "name": "Galletas digestive", "quantity": "200", "unit": "g", "optional": false },
+        { "name": "Mantequilla", "quantity": "80", "unit": "g", "optional": false },
+        { "name": "Azúcar", "quantity": "120", "unit": "g", "optional": false },
+        { "name": "Queso crema", "quantity": "500", "unit": "g", "optional": false },
+        { "name": "Huevos", "quantity": "3", "unit": "unidad", "optional": false },
+        { "name": "Nata líquida para cocinar", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Fresas", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Azúcar glas", "quantity": "1", "unit": "cdta", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar la base", "description": "Tritura las galletas y mézclalas con la mantequilla derretida. Compacta la mezcla en el molde con ayuda del fondo de un vaso y hornea diez minutos.", "durationMinutes": 15 },
+        { "order": 2, "title": "Preparar el relleno", "description": "Bate el queso crema con el azúcar hasta que no queden grumos. Incorpora los huevos de uno en uno y después la nata sin dejar de batir.", "durationMinutes": 10 },
+        { "order": 3, "title": "Hornear al baño maría", "description": "Vierte el filling en la base y hornea al baño maría hasta que el centro se mueva apenas al agitar el molde. Deja templar dentro del horno apagado.", "durationMinutes": 35 },
+        { "order": 4, "title": "Decorar", "description": "Enfría la tarta en la nevera y coronarla con fresas lavadas, cortadas por la mitad y repartidas por la superficie. Añade una pizca de azúcar glas.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "flan-de-caramelo-de-jigglypuff",
+      "title": "Flan de caramelo de Jigglypuff",
+      "summary": "Flan casero de huevo con caramelo oscuro y textura sedosa, ideal para la merienda.",
+      "description": "El flan de Jigglypuff es un postre de los que se preparan con unos pocos ingredientes y una varilla, sin necesidad de horno. Basta con un baño de agua caliente y paciencia para que el caramelo cuaje.\n\nEl caramelo se hace en la propia cazuela, lo que consigue un fondo tostado que no se consigue con caramelo industrial. La mezcla de huevo y leche se cuaja muy despacio y da esa textura cremosa que se deshace en la boca.",
+      "category": "Postre",
+      "difficulty": "Fácil",
+      "prepMinutes": 15,
+      "cookMinutes": 45,
+      "servings": 6,
+      "tags": ["flan", "postre", "caramelo"],
+      "allergens": ["huevo", "lácteos"],
+      "tips": "El baño de agua debe estar casi hirviendo, si no el flan se corta y queda poroso.",
+      "pokemon": [
+        { "id": 39, "name": "jigglypuff" },
+        { "id": 35, "name": "clefairy" }
+      ],
+      "ingredients": [
+        { "name": "Azúcar", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Agua", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Huevos", "quantity": "4", "unit": "unidad", "optional": false },
+        { "name": "Leche entera", "quantity": "500", "unit": "ml", "optional": false },
+        { "name": "Leche condensada", "quantity": "200", "unit": "g", "optional": false },
+        { "name": "Vainilla", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Azúcar glas", "quantity": "1", "unit": "cdta", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Hacer el caramelo", "description": "Calienta el azúcar con el agua hasta que forme un caramelo oscuro. Vuelca de inmediato en los molds caramelizados y deja enfriar.", "durationMinutes": 10 },
+        { "order": 2, "title": "Batir la mezcla", "description": "Bate los huevos con la leche y la leche condensada hasta obtener una mezcla homogénea. Añade la vainilla y cuela con un colador fino.", "durationMinutes": 8 },
+        { "order": 3, "title": "Cocinar al baño maría", "description": "Rellena los molds y colócalos en una bandeja con agua casi hirviendo. Cocina a fuego muy suave hasta que el flan esté firme pero aún temblón.", "durationMinutes": 40 },
+        { "order": 4, "title": "Desmoldar y servir", "description": "Deja templar el flan, pásalo un momento por el horno para que caiga el caramelo y sírvelo frío con azúcar glas.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "helado-de-miel-de-lapras",
+      "title": "Helado de miel de Lapras",
+      "summary": "Helado cremoso de miel y azahar con una textura suave y aterciopelada.",
+      "description": "Este helado combina la miel con el aroma sutil del azahar, un maridaje propio de las cocinas mediterráneas. La textura es cremosa y baja en cristalización, algo que se consigue con yemas y azúcar bien emulsionados.\n\nNo necesita máquina de helados: con un batidor de varillas y la congeladora de casa se consigue un resultado muy cercano al de una nata montada de verdad.",
+      "category": "Postre",
+      "difficulty": "Media",
+      "prepMinutes": 15,
+      "cookMinutes": 12,
+      "servings": 4,
+      "tags": ["helado", "miel", "cremoso"],
+      "allergens": ["lácteos"],
+      "tips": "Bate la mezcla cada media hora mientras se congela para que el helado quede más cremoso.",
+      "pokemon": [
+        { "id": 131, "name": "lapras" },
+        { "id": 87, "name": "dewgong" }
+      ],
+      "ingredients": [
+        { "name": "Leche entera", "quantity": "300", "unit": "ml", "optional": false },
+        { "name": "Nata para montar", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Miel de azahar", "quantity": "80", "unit": "g", "optional": false },
+        { "name": "Azúcar", "quantity": "60", "unit": "g", "optional": false },
+        { "name": "Yemas de huevo", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Azúcar glas", "quantity": "20", "unit": "g", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar la base", "description": "Calienta la leche con la miel y el azúcar hasta que el azúcar se disuelva. Retira del fuego y deja templar un par de minutos.", "durationMinutes": 10 },
+        { "order": 2, "title": "Emulsionar las yemas", "description": "Bate las yemas y añádelas a la leche templada sin dejar de batir. Monta la nata a punto de crema firme y mézclala con movimientos envolventes.", "durationMinutes": 8 },
+        { "order": 3, "title": "Congelar", "description": "Vierte la mezcla en un recipiente y congela. Cada media hora bate la superficie para romper los cristales y mantener la textura cremosa.", "durationMinutes": 5 },
+        { "order": 4, "title": "Servir", "description": "Saca el helado del congelador unos minutos antes para que pierda el punto de congelación. Reparte en boles y corona con azúcar glas.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "zumo-de-anguila-de-gyarados",
+      "title": "Zumo de anguila de Gyarados",
+      "summary": "Zumo verde espeso de espinaca, piña y jengibre con un toque de agua de coco para tomarlo frío.",
+      "description": "Un zumo verde con la intensidad de la anguila gigante: espesa la espinaca y la combina con el dulzor ácido de la piña y el picante fresco del jengibre.\n\nEl agua de coco suaviza el sabor herboso y aporta textura, así que el resultado es fácil de beber y nada áspero. Se toma muy frío, con un poco de hielo para que no pierda su color intenso.",
+      "category": "Bebida",
+      "difficulty": "Fácil",
+      "prepMinutes": 12,
+      "cookMinutes": 6,
+      "servings": 2,
+      "tags": ["zumo", "verde", "desayuno"],
+      "allergens": [],
+      "tips": "Usa piña bien madura y enfría la bebida un rato antes de servirla.",
+      "pokemon": [
+        { "id": 130, "name": "gyarados" },
+        { "id": 129, "name": "magikarp" }
+      ],
+      "ingredients": [
+        { "name": "Espinaca fresca", "quantity": "80", "unit": "g", "optional": false },
+        { "name": "Piña", "quantity": "200", "unit": "g", "optional": false },
+        { "name": "Plátano", "quantity": "1/2", "unit": "unidad", "optional": false },
+        { "name": "Jengibre fresco", "quantity": "10", "unit": "g", "optional": false },
+        { "name": "Agua de coco", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Zumo de limón", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Hielo", "quantity": "100", "unit": "g", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar los ingredientes", "description": "Lava la espinaca, pela el jengibre y trocea la piña y el plátano. Deja todo a temperatura ambiente unos minutos para que no se corte el batido.", "durationMinutes": 5 },
+        { "order": 2, "title": "Triturar", "description": "Licúa la espinaca con el agua de coco hasta que no queden trozos. Añade el jengibre, la piña, el plátano y el limón y vuelve a triturar hasta obtener una textura suave.", "durationMinutes": 6 },
+        { "order": 3, "title": "Enfriar y ajustar el dulzor", "description": "Pasa el zumo a un jarra y consérvalo en la nevera. Antes de servirlo, pruébalo y corrige el punto de azúcar con un poco más de piña si hace falta.", "durationMinutes": 4 },
+        { "order": 4, "title": "Servir frío", "description": "Sirve en vasos altos con hielo y un colador para conservar la fibra de la espinaca. Acompáñalo con una rodaja de limón.", "durationMinutes": 3 }
+      ]
+    },
+    {
+      "id": 10,
+      "slug": "batido-tropical-de-dragonite",
+      "title": "Batido tropical de Dragonite",
+      "summary": "Batido cremoso de mango, maracuyá y leche de coco con un toque de lima y miel.",
+      "description": "El batido de Dragonite mezcla la dulzura madura del mango con el ácido valiente de la maracuyá. La leche de coco lo hace cremoso y el zumo de lima le da ese punto fresco que evita que empalague.\n\nEs un batido de licuado clásico, de los que se beben de inmediato con un vaso alto y una pajita. Conviene usar mango maduro pero no demasiado blando, para que el batido no pierda cuerpo.",
+      "category": "Bebida",
+      "difficulty": "Fácil",
+      "prepMinutes": 12,
+      "cookMinutes": 8,
+      "servings": 2,
+      "tags": ["batido", "tropical", "coco"],
+      "allergens": [],
+      "tips": "Congela trozos de mango en verano: el batido queda más denso y cremoso.",
+      "pokemon": [
+        { "id": 149, "name": "dragonite" },
+        { "id": 148, "name": "dragonair" }
+      ],
+      "ingredients": [
+        { "name": "Mango maduro", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Maracuyá", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Leche de coco", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Yogur natural", "quantity": "100", "unit": "g", "optional": false },
+        { "name": "Zumo de lima", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Miel", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Hielo", "quantity": "150", "unit": "g", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar la fruta", "description": "Pela y trocea el mango. Abre las maracuyás y recoge la pulpa con una cuchara, descartando las semillas.", "durationMinutes": 7 },
+        { "order": 2, "title": "Licuar la base", "description": "Tritura el mango con el yogur y la leche de coco hasta que quede una mezcla lisa y sin grumos, con la cuchara de la licuadora en movimiento.", "durationMinutes": 5 },
+        { "order": 3, "title": "Añadir la maracuyá", "description": "Incorpora la pulpa de maracuyá, el zumo de lima y la miel. Tritura solo unos segundos para que queden trozos de fruta y no una crema.", "durationMinutes": 4 },
+        { "order": 4, "title": "Servir", "description": "Reparte en vasos altos con hielo picado y acompaña de medio gajo de maracuyá para dar un toque visual y un último zest de ácido.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 11,
+      "slug": "limonada-de-menta-y-limon-de-eevee",
+      "title": "Limonada de menta y limón de Eevee",
+      "summary": "Limonada casera con zumo recién exprimido, hojas de menta fresca y un toque de miel.",
+      "description": "Una limonada bien hecha se nota en el aroma: el zumo se exprime justo antes de servirlo y la menta se machaca solo un poco para que no amargue.\n\nEl agua con gas se añade en el último momento para conservar el gas, y la miel sustituye al azúcar de forma más natural. Con rodajas de limón y hojas de menta queda muy presentable para una mesa de verano.",
+      "category": "Bebida",
+      "difficulty": "Fácil",
+      "prepMinutes": 12,
+      "cookMinutes": 6,
+      "servings": 4,
+      "tags": ["limonada", "refrescante", "menta"],
+      "allergens": [],
+      "tips": "Congela parte del zumo en cubitos de hielo para que la limonada aguante más frío sin diluirse.",
+      "pokemon": [
+        { "id": 133, "name": "eevee" },
+        { "id": 134, "name": "vaporeon" }
+      ],
+      "ingredients": [
+        { "name": "Limones", "quantity": "4", "unit": "unidad", "optional": false },
+        { "name": "Hojas de menta fresca", "quantity": "20", "unit": "g", "optional": false },
+        { "name": "Miel", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Agua con gas muy fría", "quantity": "1000", "unit": "ml", "optional": false },
+        { "name": "Hielo", "quantity": "200", "unit": "g", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar la menta", "description": "Enjuaga las hojas de menta, sécalas y machácalas suavemente en el fondo de un mortero o un vaso para que liberen sus aceites esenciales.", "durationMinutes": 5 },
+        { "order": 2, "title": "Exprimir los limones", "description": "Exprime los limones y filtra el zumo con un colador fino para retirar las semillas y la pulpa. Guarda las mitades de limón para decorar.", "durationMinutes": 6 },
+        { "order": 3, "title": "Endulzar el zumo", "description": "Calienta un poco de agua con la miel hasta que se disuelva y mézclalo con el zumo exprimido. Deja enfriar la mezcla unos minutos.", "durationMinutes": 3 },
+        { "order": 4, "title": "Montar la limonada", "description": "Añade el agua con gas muy fría, el hielo y las hojas de menta. Revuelve con cuidado una sola vez y sirve de inmediato con rodajas de limón.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 12,
+      "slug": "patatas-panadera-de-ponyta",
+      "title": "Patatas panadera de Ponyta",
+      "summary": "Patatas asadas en su piel con romero y ajo, crujientes por fuera y tiernas por dentro.",
+      "description": "El secreto de las patatas panaderas está en cortarlas en cuatro sin llegar a separar la piel y en hornear a temperatura alta. Así el interior se cuece en su propio jugo mientras la piel se reseca y queda crujiente.\n\nEl romero y el ajo se perfuman el aceite que se vierte al final sobre la bandeja. Es una guarnición sin gluten, fácil de preparar y que siempre funciona junto a una carne o un pescado a la plancha.",
+      "category": "Guarnición",
+      "difficulty": "Fácil",
+      "prepMinutes": 15,
+      "cookMinutes": 45,
+      "servings": 4,
+      "tags": ["patatas", "horno", "rustico"],
+      "allergens": [],
+      "tips": "Corta las patatas en cuatro sin separar la piel y mézclalas bien con el aceite antes de hornear.",
+      "pokemon": [
+        { "id": 77, "name": "ponyta" }
+      ],
+      "ingredients": [
+        { "name": "Patatas", "quantity": "800", "unit": "g", "optional": false },
+        { "name": "Aceite de oliva virgen extra", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Romero fresco", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "4", "unit": "unidad", "optional": false },
+        { "name": "Sal marina en escamas", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Pimienta negra molida", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar las patatas", "description": "Lava bien las patatas y córtalas en cuatro sin separar la piel. Deja el ajo aplastado con la piel y el romero deshojado.", "durationMinutes": 10 },
+        { "order": 2, "title": "Aliñar", "description": "Mete las patatas, el ajo y el romero en una fuente. Riega con el aceite, sazona con sal y pimienta y remueve para que queden bien impregnadas.", "durationMinutes": 6 },
+        { "order": 3, "title": "Hornear a alta temperatura", "description": "Hornea a temperatura alta hasta que la piel esté dorada y crujiente. A mitad de cocción baja el fuego para que el interior se termine de cocer.", "durationMinutes": 40 },
+        { "order": 4, "title": "Servir", "description": "Saca la fuente del horno, aparta las patatas y sirve el aceite de la bandeja por encima para que brillen.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 13,
+      "slug": "boniato-asado-con-romero-de-charmander",
+      "title": "Boniato asado con romero de Charmander",
+      "summary": "Boniato en gajos asado con romero y ajo, dulce por dentro y tostado por fuera.",
+      "description": "El boniato asado es la guarnición que mejor acompaña a casi todo: carne asada, pescado a la plancha o legumbres. Al asarlo en gajos grandes y con la piel, el interior se carameliza y queda como un puré natural.\n\nEl romero y el ajo, con un toque de pimentón dulce, aromatizan sin tapar el sabor dulce del boniato. Conviene añadirlo al final, porque el pimentón quemado amarga mucho.",
+      "category": "Guarnición",
+      "difficulty": "Fácil",
+      "prepMinutes": 10,
+      "cookMinutes": 40,
+      "servings": 4,
+      "tags": ["boniato", "horno", "vegetariano"],
+      "allergens": [],
+      "tips": "Añade el pimentón al final del horneado para que no se queme y amargue.",
+      "pokemon": [
+        { "id": 4, "name": "charmander" },
+        { "id": 77, "name": "ponyta" }
+      ],
+      "ingredients": [
+        { "name": "Boniato", "quantity": "800", "unit": "g", "optional": false },
+        { "name": "Aceite de oliva", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Romero fresco", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Pimentón dulce", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Pimienta negra", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Cortar el boniato", "description": "Pela el boniato y córtalo en gajos gruesos de igual tamaño. Los gajos muy pequeños se queman antes de ablandarse.", "durationMinutes": 8 },
+        { "order": 2, "title": "Aliñar y colocar", "description": "Mezcla los gajos con el aceite, el ajo aplastado y el romero. Dispónlos en una bandeja sin amontonar y sazona con sal y pimienta.", "durationMinutes": 6 },
+        { "order": 3, "title": "Asar", "description": "Hornea hasta que los bordes estén tostados y el centro muy tierno. Añade el pimentón dulce en los últimos minutos.", "durationMinutes": 35 },
+        { "order": 4, "title": "Servir", "description": "Deja reposar cinco minutos para que se asiente el jugo y sirve como guarnición de carne o pescado.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 14,
+      "slug": "pure-de-coliflor-de-slowbro",
+      "title": "Puré de coliflor de Slowbro",
+      "summary": "Puré de coliflor suave y cremoso con queso crema y un toque de nuez moscada.",
+      "description": "El puré de coliflor es una alternativa ligera al puré de patata que funciona muy bien como guarnición o como entrada templada. Solo necesita una olla y un poco de paciencia.\n\nLa coliflor se cuece en caldo para que no pierda sabor y se tritura con el queso crema y un poco de mantequilla. La nuez moscada y el ajo le dan ese punto cálido que lo hace mucho más interesante de lo que parece.",
+      "category": "Guarnición",
+      "difficulty": "Fácil",
+      "prepMinutes": 10,
+      "cookMinutes": 20,
+      "servings": 4,
+      "tags": ["pure", "coliflor", "vegetariano"],
+      "allergens": ["lácteos"],
+      "tips": "Tritura fuera del fuego con la coliflor bien caliente, así se obtiene una textura más suave.",
+      "pokemon": [
+        { "id": 80, "name": "slowbro" },
+        { "id": 79, "name": "slowpoke" }
+      ],
+      "ingredients": [
+        { "name": "Coliflor", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Patata", "quantity": "300", "unit": "g", "optional": false },
+        { "name": "Cebolla", "quantity": "1/2", "unit": "unidad", "optional": false },
+        { "name": "Diente de ajo", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Caldo de verduras", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Queso crema", "quantity": "80", "unit": "g", "optional": false },
+        { "name": "Mantequilla", "quantity": "30", "unit": "g", "optional": false },
+        { "name": "Nuez moscada", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar las verduras", "description": "Trocea la coliflor, pela la patata y corta la cebolla. El ajo solo necesita estar aplastado con la piel para infusionar.", "durationMinutes": 8 },
+        { "order": 2, "title": "Cocer", "description": "Cuece la coliflor, la patata y la cebolla en el caldo con el ajo. Cuando la patata esté tierna, retira el ajo y sala el caldo.", "durationMinutes": 16 },
+        { "order": 3, "title": "Triturar", "description": "Escurre las verduras reservando un poco de caldo y tritúralas con el queso crema y la mantequilla. Añade caldo hasta conseguir la textura deseada.", "durationMinutes": 8 },
+        { "order": 4, "title": "Terminar", "description": "Prueba, añade nuez moscada y una pizca de sal, y sirve caliente con un hilo de mantequilla fundida.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 15,
+      "slug": "croquetas-crujientes-de-snorlax",
+      "title": "Croquetas crujientes de Snorlax",
+      "summary": "Croquetas cremosas de patata y jamón empanadas en pan rallado, doradas al horno.",
+      "description": "Estas croquetas de Snorlax son de las que desaparecen en el minuto siguiente a salir del horno. La base de patata se liga con harina y huevo hasta quedar una masa firme que no se rompe al empanar.\n\nHornearlas en lugar de freírlas consigue una capa de pan rallado muy crujiente con mucho menos aceite. Hay que hornear a temperatura alta y no tocarlas hasta que estén doradas, porque están muy frágiles al salir.",
+      "category": "Aperitivo",
+      "difficulty": "Media",
+      "prepMinutes": 25,
+      "cookMinutes": 25,
+      "servings": 6,
+      "tags": ["croquetas", "aperitivo", "horno"],
+      "allergens": ["gluten", "lácteos", "huevo"],
+      "tips": "Deja enfriar la masa en la nevera antes de empanar: se manipula mucho mejor y las croquetas quedan más firmes.",
+      "pokemon": [
+        { "id": 143, "name": "snorlax" },
+        { "id": 52, "name": "meowth" }
+      ],
+      "ingredients": [
+        { "name": "Patatas", "quantity": "700", "unit": "g", "optional": false },
+        { "name": "Jamón serrano en taquitos", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Cebolla", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Harina de trigo", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Huevo", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Leche", "quantity": "50", "unit": "ml", "optional": false },
+        { "name": "Pan rallado", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Aceite de oliva", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Hervir las patatas", "description": "Cuece las patatas con la piel hasta que estén tiernas. Escúrrelas, pélalas y córtalas en trozos grandes.", "durationMinutes": 15 },
+        { "order": 2, "title": "Preparar la masa", "description": "Sofríe la cebolla picada con un poco de aceite, añade el jamón y la patata machacada. Incorpora la harina, el huevo y la leche y remueve hasta que la masa se despegue del fondo.", "durationMinutes": 12 },
+        { "order": 3, "title": "Formar y empanar", "description": "Extiende la masa sobre una bandeja y deja enfriar en la nevera. Forma bolas o croquetas ovaladas, pásalas por el pan rallado y rocía con aceite.", "durationMinutes": 8 },
+        { "order": 4, "title": "Hornear", "description": "Hornea a temperatura alta hasta que estén doradas por todos los lados. Deja que reposen dos minutos antes de sacarlas de la bandeja.", "durationMinutes": 15 }
+      ]
+    },
+    {
+      "id": 16,
+      "slug": "hummus-de-garbanzos-de-machop",
+      "title": "Hummus de garbanzos de Machop",
+      "summary": "Hummus cremoso de garbanzos con tahini, limón y pimentón, ideal para picar con pan caliente.",
+      "description": "El hummus de Machop es de esos aperitivos que se montan en cinco minutos y siempre funcionan. La clave está en triturar mucho tiempo y en que el tahini quede bien emulsionado con el limón.\n\nEl agua de hielo, que se añade al final, es la que convierte la textura granulosa en una crema suave y sedosa. Se sirve templado con pan de pita recién hecho, aunque también funciona frío.",
+      "category": "Aperitivo",
+      "difficulty": "Fácil",
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "servings": 4,
+      "tags": ["hummus", "garbanzos", "vegetariano"],
+      "allergens": ["gluten"],
+      "tips": "Tritura más tiempo del que parece necesario: el tahini se emulsiona y la textura queda totalmente lisa.",
+      "pokemon": [
+        { "id": 66, "name": "machop" }
+      ],
+      "ingredients": [
+        { "name": "Garbanzos cocidos", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Tahini", "quantity": "60", "unit": "g", "optional": false },
+        { "name": "Zumo de limón", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Diente de ajo", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Pimentón dulce", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Aceite de oliva virgen extra", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Agua muy fría", "quantity": "80", "unit": "ml", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Pan de pita", "quantity": "4", "unit": "unidad", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Preparar la base", "description": "Escorre los garbanzos y lávalos con agua fría. Tritura el ajo con el limón y la sal hasta que formen una pasta.", "durationMinutes": 6 },
+        { "order": 2, "title": "Triturar el hummus", "description": "Añade los garbanzos y tritura a velocidad alta. Incorpora el tahini y el aceite en hilo, y al final el agua fría hasta que la crema quede completamente lisa.", "durationMinutes": 10 },
+        { "order": 3, "title": "Aliñar y servir", "description": "Prueba y ajusta el limón y la sal. Sírvelo en un plato hondo con un surco hecho con la cuchara, una pizca de pimentón y un hilo de aceite.", "durationMinutes": 4 },
+        { "order": 4, "title": "Tostar el pan", "description": "Calienta el pan de pita en una sartén o en el tostador hasta que esté crujiente y ligeramente tostado. Sírvelo templado junto al hummus.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 17,
+      "slug": "alitas-picantes-de-arcanine",
+      "title": "Alitas picantes de Arcanine",
+      "summary": "Alitas de pollo marinadas en paprika y cayena, horneadas hasta quedar crocantes y jugosas.",
+      "description": "El secreto de unas alitas picantes jugosas es la marinada y el horneado a alta temperatura, sin dar la vuelta a mitad de cocción. Así la piel se seca y cruje mientras el interior conserva el jugo.\n\nLa mezcla de pimentón dulce, cayena y un toque de miel y soja da un sabor profundo y ligeramente agridulce que recuerda a las alitas estilo Buffalo de la cocina callejera. Es un aperitivo perfecto para compartir.",
+      "category": "Aperitivo",
+      "difficulty": "Media",
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "servings": 4,
+      "tags": ["pollo", "picante", "horno"],
+      "allergens": ["picante"],
+      "tips": "Seca bien las alitas antes de marinar y no las gires al hornear, así la piel queda bien crocante.",
+      "pokemon": [
+        { "id": 59, "name": "arcanine" }
+      ],
+      "ingredients": [
+        { "name": "Alitas de pollo", "quantity": "800", "unit": "g", "optional": false },
+        { "name": "Pimentón dulce", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Cayena molida", "quantity": "0,5", "unit": "cdta", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "3", "unit": "unidad", "optional": false },
+        { "name": "Salsa de soja", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Miel", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Aceite de oliva", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Marinar", "description": "Mezcla el pimentón, la cayena, el ajo picado, la soja, la miel y el aceite. Añade las alitas, sala y deja marinar al menos veinte minutos.", "durationMinutes": 12 },
+        { "order": 2, "title": "Preparar la bandeja", "description": "Seca las alitas con papel de cocina y colócalas en una bandeja sin amontonar, con la piel hacia arriba. Precalienta el horno a temperatura alta.", "durationMinutes": 3 },
+        { "order": 3, "title": "Hornear", "description": "Hornea a alta temperatura hasta que estén doradas y crujientes por fuera, sin darlas la vuelta a mitad de cocción.", "durationMinutes": 26 },
+        { "order": 4, "title": "Servir", "description": "Deja las alitas reposar dos minutos para que redistribute el jugo y sírvelas con un poco de salsa de soja o un alioli suave.", "durationMinutes": 4 }
+      ]
+    },
+    {
+      "id": 18,
+      "slug": "ramen-de-cangrejo-de-krabby",
+      "title": "Ramen de cangrejo de Krabby",
+      "summary": "Ramen de caldo suave con cangrejo, huevo marinado, fideos y verduras crujientes.",
+      "description": "El ramen de Krabby es laborioso por los toppings, pero cada uno se prepara en pocos minutos: huevo marinado, bambú, cebolleta y el cangrejo salteado al final.\n\nEl caldo se arma con una base de pollo y soja y se deja infusionar con el jengibre. El truco final es calentar el bol antes de servir, porque un ramen frío pierde gran parte de su gracia.",
+      "category": "Plato principal",
+      "difficulty": "Difícil",
+      "prepMinutes": 30,
+      "cookMinutes": 30,
+      "servings": 4,
+      "tags": ["ramen", "marisco", "sopa"],
+      "allergens": ["gluten", "marisco", "huevo", "soja"],
+      "tips": "Calienta el bol con agua hirviendo antes de servir: el ramen debe llegar caliente al mantel.",
+      "pokemon": [
+        { "id": 98, "name": "krabby" },
+        { "id": 99, "name": "kingler" }
+      ],
+      "ingredients": [
+        { "name": "Fideos de trigo", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Cangrejo", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Caldo de pollo", "quantity": "1200", "unit": "ml", "optional": false },
+        { "name": "Salsa de soja", "quantity": "3", "unit": "cdta", "optional": false },
+        { "name": "Huevos", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Brócoli", "quantity": "150", "unit": "g", "optional": false },
+        { "name": "Maíz dulce", "quantity": "100", "unit": "g", "optional": false },
+        { "name": "Cebolleta", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Aceite de sésamo", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Jengibre fresco", "quantity": "15", "unit": "g", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Marinar los huevos", "description": "Cuece los huevos seis minutos, pásalos por agua fría y pélalos. Sumérgelos en la soja con el jengibre para que se tiñan.", "durationMinutes": 14 },
+        { "order": 2, "title": "Preparar el caldo", "description": "Calienta el caldo de pollo con el jengibre y la soja. Prueba y ajusta el sabor de sal antes de añadir las verduras.", "durationMinutes": 10 },
+        { "order": 3, "title": "Cocinar cangrejo y verduras", "description": "Saltea el cangrejo con un poco de aceite y cuece al vapor el brócoli y el maíz dulce. Escurre las verduras para que no aguaden el caldo.", "durationMinutes": 14 },
+        { "order": 4, "title": "Montar los boles", "description": "Cuece los fideos según el paquete, mézclalos con el caldo caliente y reparte en boles con las verduras, el cangrejo, el huevo marinado y la cebolleta picada.", "durationMinutes": 12 }
+      ]
+    },
+    {
+      "id": 19,
+      "slug": "bacalao-al-pil-pil-de-corphish",
+      "title": "Bacalao al pil-pil de Corphish",
+      "summary": "Bacalao desalado con salsa de ajo y aceite emulsionada, con gambas y guindilla.",
+      "description": "El pil-pil es una técnica de la cocina gallega que consiste en emulsionar aceite con ajo hasta conseguir una salsa cremosa que envuelve el pescado sin llegar a hervir. El resultado es un plato con salsa sedosa y un lomo tiernísimo.\n\nLas gambas de Corphish se saltan al final y aportan color y un punto dulce que suaviza el picante de la guindilla. Merece la pena desalar el bacalao con un día de antelación.",
+      "category": "Plato principal",
+      "difficulty": "Difícil",
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "servings": 4,
+      "tags": ["bacalao", "pescado", "marisco"],
+      "allergens": ["pescado", "marisco", "picante"],
+      "tips": "Desala el bacalao un día antes en agua fría en la nevera, cambiando el agua dos veces.",
+      "pokemon": [
+        { "id": 341, "name": "corphish" },
+        { "id": 342, "name": "crawdaunt" }
+      ],
+      "ingredients": [
+        { "name": "Lomos de bacalao en salazón", "quantity": "700", "unit": "g", "optional": false },
+        { "name": "Gambas", "quantity": "200", "unit": "g", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "6", "unit": "unidad", "optional": false },
+        { "name": "Guindilla", "quantity": "1", "unit": "unidad", "optional": true },
+        { "name": "Aceite de oliva virgen extra", "quantity": "150", "unit": "ml", "optional": false },
+        { "name": "Caldo de pescado", "quantity": "200", "unit": "ml", "optional": false },
+        { "name": "Perejil picado", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Harina de trigo", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Desalar y escurrir", "description": "Escorre el bacalao desalado y sécalo bien con papel de cocina. Espolvorea la harina y marca la piel para que no se pegue.", "durationMinutes": 12 },
+        { "order": 2, "title": "Preparar el pil-pil", "description": "Lamina el ajo finamente y fríelo en el aceite a fuego muy lento hasta que esté dorado, sin oscurecerse. Retira la mitad del ajo.", "durationMinutes": 12 },
+        { "order": 3, "title": "Cocinar el bacalao", "description": "Coloca el bacalao en la sartén con la piel hacia abajo, añade el caldo y la guindilla y cocina a fuego medio sin llegar a hervir.", "durationMinutes": 20 },
+        { "order": 4, "title": "Añadir las gambas", "description": "Saltea las gambas aparte y añádelas a la sartén junto con el ajo reservado y el perejil. Emulsiona el aceite con el caldo y sirve con pan.", "durationMinutes": 12 }
+      ]
+    },
+    {
+      "id": 20,
+      "slug": "pasta-con-pulpo-de-octillery",
+      "title": "Pasta con pulpo de Octillery",
+      "summary": "Pasta al tomate con pulpo a la brasa, aceitunas negras y un toque de orégano.",
+      "description": "El pulpo a la brasa concentra el sabor y la textura en pocos minutos de horno. Con un corte de pulpo bien dorado y una salsa de tomate bien hecha, el plato tiene la profundidad de una cocina de mar sin complicaciones.\n\nEl orégano seco y las aceitunas aportan el contraste salado que equilibra el tomate. Es un plato rápido de ejecutar: la pasta se cuece mientras el pulpo se asa.",
+      "category": "Plato principal",
+      "difficulty": "Media",
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "servings": 4,
+      "tags": ["pasta", "pulpo", "tomate"],
+      "allergens": ["gluten", "marisco"],
+      "tips": "Asa el pulpo a la brasa y no a la plancha: el fuego directo lo seca y la brasa lo carameliza.",
+      "pokemon": [
+        { "id": 224, "name": "octillery" }
+      ],
+      "ingredients": [
+        { "name": "Pulpo", "quantity": "500", "unit": "g", "optional": false },
+        { "name": "Pasta", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Tomate triturado", "quantity": "400", "unit": "g", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "3", "unit": "unidad", "optional": false },
+        { "name": "Aceitunas negras", "quantity": "80", "unit": "g", "optional": false },
+        { "name": "Orégano seco", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Aceite de oliva virgen extra", "quantity": "4", "unit": "cdta", "optional": false },
+        { "name": "Guindilla", "quantity": "1/2", "unit": "unidad", "optional": true },
+        { "name": "Perejil picado", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Limpiar el pulpo", "description": "Retira las ventosas con la uña, lava bien los tentáculos y seca con papel de cocina. Si está congelado, descongélalo en la nevera la noche anterior.", "durationMinutes": 12 },
+        { "order": 2, "title": "Asar el pulpo", "description": "Riega el pulpo con aceite y hazlo a la brasa o al horno muy caliente hasta que se dore. Deja reposar antes de cortarlo.", "durationMinutes": 15 },
+        { "order": 3, "title": "Hacer la salsa", "description": "Sofríe el ajo laminado con el orégano, añade el tomate y deja reducir diez minutos. Incorpora las aceitunas troceadas y la guindilla.", "durationMinutes": 10 },
+        { "order": 4, "title": "Cocer la pasta y emplatar", "description": "Cuece la pasta al dente, escúrrela y mézclala con la salsa. Sirve con el pulpo cortado en piezas, perejil picado y un hilo de aceite crudo.", "durationMinutes": 13 }
+      ]
+    },
+    {
+      "id": 21,
+      "slug": "salteado-de-verduras-de-bulbasaur",
+      "title": "Salteado de verduras de Bulbasaur",
+      "summary": "Salteado de verduras de colores al wok con salsa de soja y sésamo, vegano y muy rápido.",
+      "description": "Un salteado de verduras al wok es la forma más rápida de convertir un montón de verduras de la nevera en un plato completo. El fuego alto y el movimiento constante son clave para que queden al dente.\n\nLa salsa de soja, el jengibre y el aceite de sésamo aportan todo el sabor. La maicena solo se usa para ligar la salsa y darle ese brillo característico del wok.",
+      "category": "Plato principal",
+      "difficulty": "Fácil",
+      "prepMinutes": 20,
+      "cookMinutes": 12,
+      "servings": 4,
+      "tags": ["verduras", "wok", "vegano"],
+      "allergens": ["soja"],
+      "tips": "Corta todas las verduras del mismo tamaño y hazlas al dente: si se pasan de cocción, pierden color y textura.",
+      "pokemon": [
+        { "id": 1, "name": "bulbasaur" }
+      ],
+      "ingredients": [
+        { "name": "Brócoli", "quantity": "250", "unit": "g", "optional": false },
+        { "name": "Pimiento rojo", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Zanahoria", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Salsa de soja", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Aceite de sésamo", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Jengibre fresco", "quantity": "10", "unit": "g", "optional": false },
+        { "name": "Dientes de ajo", "quantity": "2", "unit": "unidad", "optional": false },
+        { "name": "Maicena", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Aceite de girasol", "quantity": "2", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false }
+      ],
+      "steps": [
+        { "order": 1, "title": "Cortar las verduras", "description": "Lava y corta todas las verduras en trozos de tamaño similar. El brócoli en ramilletes y el pimiento en tiras.", "durationMinutes": 12 },
+        { "order": 2, "title": "Saltear a fuego fuerte", "description": "Calienta el wok con el aceite de girasol y saltea el ajo y el jengibre. Añade las verduras más duras primero y remueve sin parar.", "durationMinutes": 9 },
+        { "order": 3, "title": "Sazonar y ligar", "description": "Añade la soja y el aceite de sésamo, mezcla la maicena con un chorrito de agua y viértela en el wok. Remueve un minuto y salta.", "durationMinutes": 6 },
+        { "order": 4, "title": "Emplatar", "description": "Retira del fuego y sirve en un plato hondo con las verduras bien separadas y un hilo de aceite de sésamo por encima. Añade sal al gusto.", "durationMinutes": 5 }
+      ]
+    },
+    {
+      "id": 22,
+      "slug": "tortilla-de-patatas-de-togepi",
+      "title": "Tortilla de patatas de Togepi",
+      "summary": "Tortilla de patatas jugosa con cebolla dulce y un buen aceite de oliva para mojar pan.",
+      "description": "Una tortilla de patatas bien hecha tiene dos cosas: patata pochada en aceite y un punto justo de cuajada en el huevo. Togepi se considera una de esas recetas que no fallan.\n\nEl truco está en pasarla por un molde caliente y dejarla con un paño encima al final, para que termine de cuajar con su propio vapor y quede jugosa por dentro.",
+      "category": "Aperitivo",
+      "difficulty": "Fácil",
+      "prepMinutes": 20,
+      "cookMinutes": 25,
+      "servings": 4,
+      "tags": ["tortilla", "patatas", "huevo"],
+      "allergens": ["huevo"],
+      "tips": "Cuece las patatas en exceso de sal y con la piel: dan mucho más sabor a la tortilla.",
+      "pokemon": [
+        { "id": 175, "name": "togepi" },
+        { "id": 35, "name": "clefairy" }
+      ],
+      "ingredients": [
+        { "name": "Patatas", "quantity": "600", "unit": "g", "optional": false },
+        { "name": "Huevos", "quantity": "5", "unit": "unidad", "optional": false },
+        { "name": "Cebolla dulce", "quantity": "1", "unit": "unidad", "optional": false },
+        { "name": "Aceite de oliva virgen extra", "quantity": "4", "unit": "cdta", "optional": false },
+        { "name": "Sal", "quantity": "1", "unit": "cdta", "optional": false },
+        { "name": "Perejil picado", "quantity": "1", "unit": "cdta", "optional": true }
+      ],
+      "steps": [
+        { "order": 1, "title": "Cocer y pelar las patatas", "description": "Cuece las patatas con sal hasta que estén muy tiernas. Pela en caliente, córtalas en láminas y deja escurrir bien el agua.", "durationMinutes": 18 },
+        { "order": 2, "title": "Pochar la patata y la cebolla", "description": "Pocha la cebolla en el aceite a fuego medio-bajo. Añade las patatas en láminas y deja que se frían con paciencia hasta que estén doradas.", "durationMinutes": 16 },
+        { "order": 3, "title": "Cuajar la tortilla", "description": "Bate los huevos con sal y viértelos sobre las patatas. Cocina a fuego medio, baja el fuego y termina con la tapa y un paño encima.", "durationMinutes": 14 },
+        { "order": 4, "title": "Servir", "description": "Deja reposar la tortilla un minuto, pásala a una fuente y sirve templada con el perejil picado y un buen chorro de aceite en crudo.", "durationMinutes": 4 }
+      ]
+    }
+  ]
+}

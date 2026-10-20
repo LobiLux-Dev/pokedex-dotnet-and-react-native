@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useId } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { palette, radius, spacing } from '@/constants/theme';
@@ -7,6 +8,7 @@ interface SearchFieldProps {
   value: string;
   onChangeText: (value: string) => void;
   placeholder?: string;
+  accessibilityLabel?: string;
 }
 
 /**
@@ -16,11 +18,16 @@ export function SearchField({
   value,
   onChangeText,
   placeholder = 'Buscar por nombre o número',
+  accessibilityLabel = 'Buscar',
 }: SearchFieldProps) {
+  // Every tab renders its own toolbar, so the field needs a unique id.
+  const inputId = useId();
+
   return (
     <View style={styles.container}>
       <Ionicons name="search" size={18} color={palette.textTertiary} />
       <TextInput
+        id={inputId}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -30,7 +37,7 @@ export function SearchField({
         autoCorrect={false}
         returnKeyType="search"
         clearButtonMode="never"
-        accessibilityLabel="Buscar Pokémon"
+        accessibilityLabel={accessibilityLabel}
       />
       {value.length > 0 ? (
         <Pressable

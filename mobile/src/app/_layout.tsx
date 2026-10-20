@@ -24,6 +24,22 @@ export default function RootLayout() {
             />
           </NativeTabs.Trigger>
 
+          <NativeTabs.Trigger name="recipes">
+            <NativeTabs.Trigger.Label>Recetario</NativeTabs.Trigger.Label>
+            <NativeTabs.Trigger.Icon
+              sf={{ default: 'book', selected: 'book.fill' }}
+              md="menu_book"
+            />
+          </NativeTabs.Trigger>
+
+          <NativeTabs.Trigger name="seafood">
+            <NativeTabs.Trigger.Label>Seafood</NativeTabs.Trigger.Label>
+            <NativeTabs.Trigger.Icon
+              sf={{ default: 'fish', selected: 'fish.fill' }}
+              md="set_meal"
+            />
+          </NativeTabs.Trigger>
+
           <NativeTabs.Trigger name="favorites">
             <NativeTabs.Trigger.Label>Favoritos</NativeTabs.Trigger.Label>
             <NativeTabs.Trigger.Icon

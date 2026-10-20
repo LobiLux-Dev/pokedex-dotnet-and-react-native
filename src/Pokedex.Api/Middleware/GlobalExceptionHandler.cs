@@ -28,6 +28,7 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
         var (status, title) = exception switch
         {
             PokemonNotFoundException => (StatusCodes.Status404NotFound, "Pokémon not found"),
+            ResourceNotFoundException => (StatusCodes.Status404NotFound, "Resource not found"),
             ExternalServiceException => (StatusCodes.Status502BadGateway, "PokeAPI is unavailable"),
             _ => (StatusCodes.Status500InternalServerError, "Unexpected error")
         };

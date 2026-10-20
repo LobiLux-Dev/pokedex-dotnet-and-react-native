@@ -51,6 +51,12 @@ La API queda escuchando en `http://0.0.0.0:5080` (ver `Properties/launchSettings
 | `GET`  | `/api/v1/pokemon/{nameOrId}` | Ficha completa (stats, tipos, habilidades, sprites, movimientos, evolución) |
 | `GET`  | `/api/v1/pokemon/{nameOrId}/evolution` | Cadena evolutiva |
 | `GET`  | `/api/v1/types` | Tipos disponibles con el número de Pokémon de cada uno |
+| `GET`  | `/api/v1/recipes?page=1&pageSize=12&search=&category=&difficulty=&maxMinutes=&tag=` | Recetario con búsqueda y filtros |
+| `GET`  | `/api/v1/recipes/{idOrSlug}` | Receta completa (ingredientes, pasos, alérgenos) |
+| `GET`  | `/api/v1/recipes/facets` | Valores filtrables del recetario con su recuento |
+| `GET`  | `/api/v1/seafood?page=1&pageSize=12&search=&category=&sustainability=&maxPrepMinutes=` | Guía de mariscos con búsqueda y filtros |
+| `GET`  | `/api/v1/seafood/{idOrSlug}` | Ficha de marisco (origen, preparación, sabor, maridaje, nutrición) |
+| `GET`  | `/api/v1/seafood/facets` | Valores filtrables de la guía con su recuento |
 | `GET`  | `/health` | Health check |
 
 Los errores usan **RFC 7807** (`application/problem+json`): 404 para Pokémon inexistente,
@@ -110,10 +116,23 @@ EXPO_PUBLIC_API_URL=http://192.168.1.50:5080
 
 ### Funcionalidades
 
-- **Listado** paginado con scroll infinito, búsqueda por nombre o número y filtro por tipo.
+- **Pokédex**: listado paginado con scroll infinito, búsqueda por nombre o número y filtro por tipo.
 - **Ficha**: arte oficial, datos básicos, descripción (español si PokeAPI la tiene), estadísticas,
   habilidades, cadena evolutiva y movimientos agrupados por método de aprendizaje.
+- **Recetario**: 22 recetas inspiradas en Pokémon (ingredientes, pasos, dificultad, alérgenos y
+  consejos) con búsqueda por título/ingrediente/Pokémon y filtros por categoría, dificultad y tiempo.
+- **Seafood**: 26 entradas con el Pokémon y el marisco real que representa (origen, temporada,
+  preparación, sabor, maridaje y valor nutricional) con búsqueda y filtros por categoría,
+  sostenibilidad y tiempo de preparación.
 - **Favoritos**: se guardan en el dispositivo con `AsyncStorage` y aparecen en su propia pestaña.
+
+Las cuatro secciones comparten el mismo componente de búsqueda y filtros (`CatalogToolbar`), y
+todos los datos se sirven desde la API .NET (nunca directamente de PokeAPI).
+
+### Datasets editoriales
+
+`src/Pokedex.Infrastructure/Seed/*.seed.json` contiene el recetario y la guía de mariscos.
+Se incrustan como recursos del ensamblado y se cargan en la caché `HybridCache` al arrancar.
 
 ### Navegación
 
@@ -129,11 +148,19 @@ pestañas del sistema).
 
 ```
 mobile/src/app/
-├── _layout.tsx                  NativeTabs (pestañas Pokédex / Favoritos)
+├── _layout.tsx                  NativeTabs (Pokédex / Recetario / Seafood / Favoritos)
 ├── (pokedex)/
 │   ├── _layout.tsx              Stack nativo
 │   ├── index.tsx                Listado con búsqueda, filtro y scroll infinito
 │   └── pokemon/[name].tsx       Ficha
+├── recipes/
+│   ├── _layout.tsx              Stack nativo
+│   ├── index.tsx                Recetario con búsqueda y filtros
+│   └── [slug].tsx               Receta completa
+├── seafood/
+│   ├── _layout.tsx              Stack nativo
+│   ├── index.tsx                Guía de mariscos con búsqueda y filtros
+│   └── [slug].tsx               Ficha de marisco
 └── favorites/
     ├── _layout.tsx              Stack nativo
     ├── index.tsx                Favoritos guardados
@@ -154,6 +181,8 @@ dotnet test
 25 tests que cubren la capa de aplicación (paginación, filtros, búsqueda, normalización de la
 query, mapeo) y la API completa vía `WebApplicationFactory` (enrutado, serialización y
 `ProblemDetails`), con el repositorio de PokeAPI sustituido por un doble en memoria.
+
+> Con las secciones nuevas son **55 tests**: Recetario, Seafood y sus endpoints.
 
 ---
 

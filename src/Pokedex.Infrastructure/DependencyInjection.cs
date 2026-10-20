@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Polly;
 using Pokedex.Application.Abstractions;
+using Pokedex.Infrastructure.Catalog;
 using Pokedex.Infrastructure.Options;
 using Pokedex.Infrastructure.PokeApi;
 
@@ -60,6 +61,9 @@ public static class DependencyInjection
         // interface so the repository lifetime stays scoped.
         services.AddScoped<IPokemonRepository>(serviceProvider =>
             serviceProvider.GetRequiredService<PokeApiClient>());
+
+        services.AddScoped<IRecipeRepository, RecipeRepository>();
+        services.AddScoped<ISeafoodRepository, SeafoodRepository>();
 
         return services;
     }

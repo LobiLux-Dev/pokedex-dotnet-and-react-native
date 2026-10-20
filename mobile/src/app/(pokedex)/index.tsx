@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 
 import { PokemonCard } from '@/components/PokemonCard';
-import { SearchField } from '@/components/SearchField';
+import { CatalogToolbar, type FilterGroup } from '@/components/CatalogToolbar';
 import { EmptyState, ErrorState } from '@/components/StateViews';
-import { TypeFilterBar } from '@/components/TypeFilterBar';
 import { palette, spacing } from '@/constants/theme';
+import { typeLabel } from '@/constants/typeColors';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { usePokemonList, usePokemonTypes } from '@/hooks/usePokemonCatalog';
 import type { PokemonSummary } from '@/lib/types';
@@ -34,6 +34,30 @@ export default function PokemonListScreen() {
 
   const totalItems = listQuery.data?.pages[0]?.totalItems ?? 0;
   const hasFilters = debouncedSearch.length > 0 || selectedType !== null;
+
+  const filterGroups: FilterGroup[] = useMemo(
+    () => [
+      {
+        key: 'type',
+        title: 'Tipo',
+        options: [
+          { label: 'Todos', value: null },
+          ...(typesQuery.data ?? []).map((type) => ({
+            label: `${typeLabel(type.name)} (${type.pokemonCount})`,
+            value: type.name,
+          })),
+        ],
+        selected: selectedType,
+        onSelect: setSelectedType,
+      },
+    ],
+    [selectedType, typesQuery.data],
+  );
+
+  const clearFilters = () => {
+    setSearch('');
+    setSelectedType(null);
+  };
 
   const openDetail = (pokemon: PokemonSummary) => {
     router.push({ pathname: '/(pokedex)/pokemon/[name]', params: { name: pokemon.name } });
@@ -89,12 +113,13 @@ export default function PokemonListScreen() {
       }
       ListHeaderComponent={
         <View style={styles.header}>
-          <SearchField value={search} onChangeText={setSearch} />
-
-          <TypeFilterBar
-            types={typesQuery.data ?? []}
-            selected={selectedType}
-            onSelect={setSelectedType}
+          <CatalogToolbar
+            search={search}
+            onSearchChange={setSearch}
+            placeholder="Buscar por nombre o número"
+            searchLabel="Buscar Pokémon"
+            groups={filterGroups}
+            onClearAll={clearFilters}
           />
 
           <View style={styles.summaryRow}>

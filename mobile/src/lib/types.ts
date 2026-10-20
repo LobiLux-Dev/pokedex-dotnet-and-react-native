@@ -100,3 +100,96 @@ export interface PokemonType {
   name: string;
   pokemonCount: number;
 }
+
+/* ------------------------------------------------------------------ */
+/* Recetario                                                          */
+/* ------------------------------------------------------------------ */
+
+export interface RecipePokemon {
+  id: number;
+  name: string;
+  displayName: string;
+}
+
+export interface RecipeIngredient {
+  name: string;
+  quantity: string;
+  unit: string;
+  optional: boolean;
+}
+
+export interface RecipeStep {
+  order: number;
+  title: string;
+  description: string;
+  durationMinutes: number | null;
+}
+
+export interface RecipeSummary {
+  id: number;
+  slug: string;
+  title: string;
+  summary: string;
+  category: string;
+  difficulty: string;
+  prepMinutes: number;
+  cookMinutes: number;
+  totalMinutes: number;
+  servings: number;
+  tags: string[];
+  allergens: string[];
+  pokemon: RecipePokemon[];
+  ingredientCount: number;
+  stepCount: number;
+}
+
+export interface RecipeDetail extends RecipeSummary {
+  description: string;
+  tips: string | null;
+  ingredients: RecipeIngredient[];
+  steps: RecipeStep[];
+}
+
+export interface Facet {
+  name: string;
+  count: number;
+}
+
+export interface RecipeFacets {
+  categories: Facet[];
+  difficulties: Facet[];
+  tags: Facet[];
+}
+
+/* ------------------------------------------------------------------ */
+/* Seafood                                                            */
+/* ------------------------------------------------------------------ */
+
+export interface SeafoodSummary {
+  id: number;
+  slug: string;
+  title: string;
+  realName: string;
+  pokemonId: number;
+  pokemonName: string;
+  category: string;
+  sustainability: string;
+  season: string;
+  prepMinutes: number;
+  calories: number;
+  proteinGrams: number;
+  fatGrams: number;
+}
+
+export interface SeafoodDetail extends SeafoodSummary {
+  origin: string;
+  preparation: string;
+  flavor: string;
+  pairing: string;
+  tips: string | null;
+}
+
+export interface SeafoodFacets {
+  categories: Facet[];
+  sustainabilities: Facet[];
+}

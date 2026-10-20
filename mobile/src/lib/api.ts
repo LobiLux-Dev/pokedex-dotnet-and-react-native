@@ -1,7 +1,18 @@
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
-import type { PagedResponse, PokemonDetail, PokemonSummary, PokemonType } from './types';
+import type {
+  PagedResponse,
+  PokemonDetail,
+  PokemonSummary,
+  PokemonType,
+  RecipeDetail,
+  RecipeFacets,
+  RecipeSummary,
+  SeafoodDetail,
+  SeafoodFacets,
+  SeafoodSummary,
+} from './types';
 
 /** Port the .NET API listens on (see src/Pokedex.Api/Properties/launchSettings.json). */
 const DEFAULT_PORT = 5080;
@@ -168,6 +179,78 @@ export function fetchPokemonDetail(nameOrId: string): Promise<PokemonDetail> {
 
 export function fetchPokemonTypes(): Promise<PokemonType[]> {
   return request<PokemonType[]>('/api/v1/types');
+}
+
+/* ------------------------------------------------------------------ */
+/* Recetario                                                          */
+/* ------------------------------------------------------------------ */
+
+export interface RecipeListParams {
+  page: number;
+  pageSize: number;
+  search?: string;
+  category?: string;
+  difficulty?: string;
+  maxMinutes?: number;
+  tag?: string;
+}
+
+export function fetchRecipes(params: RecipeListParams): Promise<PagedResponse<RecipeSummary>> {
+  const query = new URLSearchParams({
+    page: String(params.page),
+    pageSize: String(params.pageSize),
+  });
+
+  if (params.search) query.set('search', params.search);
+  if (params.category) query.set('category', params.category);
+  if (params.difficulty) query.set('difficulty', params.difficulty);
+  if (params.maxMinutes) query.set('maxMinutes', String(params.maxMinutes));
+  if (params.tag) query.set('tag', params.tag);
+
+  return request<PagedResponse<RecipeSummary>>(`/api/v1/recipes?${query.toString()}`);
+}
+
+export function fetchRecipe(idOrSlug: string): Promise<RecipeDetail> {
+  return request<RecipeDetail>(`/api/v1/recipes/${encodeURIComponent(idOrSlug)}`);
+}
+
+export function fetchRecipeFacets(): Promise<RecipeFacets> {
+  return request<RecipeFacets>('/api/v1/recipes/facets');
+}
+
+/* ------------------------------------------------------------------ */
+/* Seafood                                                            */
+/* ------------------------------------------------------------------ */
+
+export interface SeafoodListParams {
+  page: number;
+  pageSize: number;
+  search?: string;
+  category?: string;
+  sustainability?: string;
+  maxPrepMinutes?: number;
+}
+
+export function fetchSeafood(params: SeafoodListParams): Promise<PagedResponse<SeafoodSummary>> {
+  const query = new URLSearchParams({
+    page: String(params.page),
+    pageSize: String(params.pageSize),
+  });
+
+  if (params.search) query.set('search', params.search);
+  if (params.category) query.set('category', params.category);
+  if (params.sustainability) query.set('sustainability', params.sustainability);
+  if (params.maxPrepMinutes) query.set('maxPrepMinutes', String(params.maxPrepMinutes));
+
+  return request<PagedResponse<SeafoodSummary>>(`/api/v1/seafood?${query.toString()}`);
+}
+
+export function fetchSeafoodEntry(idOrSlug: string): Promise<SeafoodDetail> {
+  return request<SeafoodDetail>(`/api/v1/seafood/${encodeURIComponent(idOrSlug)}`);
+}
+
+export function fetchSeafoodFacets(): Promise<SeafoodFacets> {
+  return request<SeafoodFacets>('/api/v1/seafood/facets');
 }
 
 /** Base URL currently in use, useful to show it in the error screens. */
