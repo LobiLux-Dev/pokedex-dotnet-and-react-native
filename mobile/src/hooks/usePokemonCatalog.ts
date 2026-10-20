@@ -4,9 +4,9 @@ import { fetchPokemonDetail, fetchPokemonPage, fetchPokemonTypes } from '@/lib/a
 
 const PAGE_SIZE = 24;
 
-export function usePokemonList(search: string, type: string | null) {
+export function usePokemonList(search: string, type: string | null, generation: number | null) {
   return useInfiniteQuery({
-    queryKey: ['pokemon', 'list', search, type],
+    queryKey: ['pokemon', 'list', search, type, generation],
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       fetchPokemonPage({
@@ -14,6 +14,7 @@ export function usePokemonList(search: string, type: string | null) {
         pageSize: PAGE_SIZE,
         search: search.trim() || undefined,
         type: type ?? undefined,
+        generation: generation ?? undefined,
       }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.page + 1 : undefined,

@@ -142,35 +142,39 @@ function ChipRow({
   onSelect: (value: string | null) => void;
 }) {
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.chipRow}
-      keyboardShouldPersistTaps="handled"
-    >
-      {options.map((option) => {
-        const isSelected = option.value === selected;
+    // A horizontal ScrollView without an explicit height collapses to zero on iOS.
+    <View style={styles.chipRowWrapper}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.chipRow}
+        style={styles.chipScroll}
+        keyboardShouldPersistTaps="handled"
+      >
+        {options.map((option) => {
+          const isSelected = option.value === selected;
 
-        return (
-          <Pressable
-            key={option.value ?? '__all__'}
-            // Tapping the active chip clears the filter, so it can always be removed.
-            onPress={() => onSelect(isSelected && option.value !== null ? null : option.value)}
-            accessibilityRole="button"
-            accessibilityState={{ selected: isSelected }}
-            style={({ pressed }) => [
-              styles.chip,
-              isSelected && styles.chipSelected,
-              pressed && styles.pressed,
-            ]}
-          >
-            <Text style={[styles.chipLabel, isSelected && styles.chipLabelSelected]}>
-              {option.label}
-            </Text>
-          </Pressable>
-        );
-      })}
-    </ScrollView>
+          return (
+            <Pressable
+              key={option.value ?? '__all__'}
+              // Tapping the active chip clears the filter, so it can always be removed.
+              onPress={() => onSelect(isSelected && option.value !== null ? null : option.value)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: isSelected }}
+              style={({ pressed }) => [
+                styles.chip,
+                isSelected && styles.chipSelected,
+                pressed && styles.pressed,
+              ]}
+            >
+              <Text style={[styles.chipLabel, isSelected && styles.chipLabelSelected]}>
+                {option.label}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 }
 
@@ -178,9 +182,18 @@ const styles = StyleSheet.create({
   container: {
     gap: spacing.sm,
   },
+  chipRowWrapper: {
+    // Fixed height so the horizontal ScrollView can never collapse on iOS.
+    height: 44,
+  },
+  chipScroll: {
+    height: 44,
+    flexGrow: 0,
+  },
   chipRow: {
-    paddingVertical: spacing.xs,
+    paddingVertical: 5,
     gap: spacing.sm,
+    alignItems: 'center',
   },
   chip: {
     paddingHorizontal: spacing.lg,

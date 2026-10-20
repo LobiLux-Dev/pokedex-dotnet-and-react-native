@@ -20,12 +20,16 @@ public sealed record PokemonQuery
     /// <summary>Exact type filter, e.g. <c>electric</c>.</summary>
     public string? Type { get; init; }
 
+    /// <summary>National Pokédex generation (1 to 9).</summary>
+    public int? Generation { get; init; }
+
     /// <summary>Clamps out of range values and trims the text filters.</summary>
     public PokemonQuery Normalize() => this with
     {
         Page = Math.Max(Page, 1),
         PageSize = Math.Clamp(PageSize, 1, MaxPageSize),
         Search = string.IsNullOrWhiteSpace(Search) ? null : Search.Trim().ToLowerInvariant(),
-        Type = string.IsNullOrWhiteSpace(Type) ? null : Type.Trim().ToLowerInvariant()
+        Type = string.IsNullOrWhiteSpace(Type) ? null : Type.Trim().ToLowerInvariant(),
+        Generation = Generation is >= 1 and <= 9 ? Generation : null
     };
 }

@@ -13,6 +13,7 @@ import { CatalogToolbar, type FilterGroup } from '@/components/CatalogToolbar';
 import { PokemonCard } from '@/components/PokemonCard';
 import { EmptyState, ErrorState } from '@/components/StateViews';
 import { palette, spacing } from '@/constants/theme';
+import { GENERATIONS } from '@/constants/generations';
 import { typeLabel } from '@/constants/typeColors';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { usePokemonList, usePokemonTypes } from '@/hooks/usePokemonCatalog';
@@ -23,10 +24,11 @@ export default function PokemonListScreen() {
 
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedGeneration, setSelectedGeneration] = useState<number | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
   const typesQuery = usePokemonTypes();
-  const listQuery = usePokemonList(debouncedSearch, selectedType);
+  const listQuery = usePokemonList(debouncedSearch, selectedType, selectedGeneration);
 
   const items = useMemo(
     () => listQuery.data?.pages.flatMap((page) => page.items) ?? [],
@@ -34,7 +36,8 @@ export default function PokemonListScreen() {
   );
 
   const totalItems = listQuery.data?.pages[0]?.totalItems ?? 0;
-  const hasFilters = debouncedSearch.length > 0 || selectedType !== null;
+  const hasFilters =
+    debouncedSearch.length > 0 || selectedType !== null || selectedGeneration !== null;
 
   const filterGroups: FilterGroup[] = useMemo(
     () => [
@@ -51,13 +54,27 @@ export default function PokemonListScreen() {
         selected: selectedType,
         onSelect: setSelectedType,
       },
+      {
+        key: 'generation',
+        title: 'Generación',
+        options: [
+          { label: 'Todas', value: null },
+          ...GENERATIONS.map((generation) => ({
+            label: generation.label,
+            value: String(generation.value),
+          })),
+        ],
+        selected: selectedGeneration === null ? null : String(selectedGeneration),
+        onSelect: (value) => setSelectedGeneration(value === null ? null : Number(value)),
+      },
     ],
-    [selectedType, typesQuery.data],
+    [selectedGeneration, selectedType, typesQuery.data],
   );
 
   const clearFilters = () => {
     setSearch('');
     setSelectedType(null);
+    setSelectedGeneration(null);
   };
 
   const openDetail = (pokemon: PokemonSummary) => {

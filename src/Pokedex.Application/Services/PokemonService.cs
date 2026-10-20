@@ -12,6 +12,20 @@ namespace Pokedex.Application.Services;
 /// </summary>
 public sealed class PokemonService : IPokemonService
 {
+    /// <summary>National Pokédex id ranges of every generation.</summary>
+    private static readonly (int Min, int Max)[] GenerationRanges =
+    [
+        (1, 151),      // I
+        (152, 251),    // II
+        (252, 386),    // III
+        (387, 493),    // IV
+        (494, 649),    // V
+        (650, 721),    // VI
+        (722, 809),    // VII
+        (810, 905),    // VIII
+        (906, 1025)    // IX
+    ];
+
     private readonly IPokemonRepository _repository;
     private readonly ILogger<PokemonService> _logger;
 
@@ -39,6 +53,12 @@ public sealed class PokemonService : IPokemonService
         if (normalized.Search is not null)
         {
             filtered = filtered.Where(pokemon => Matches(pokemon, normalized.Search));
+        }
+
+        if (normalized.Generation is int generation)
+        {
+            var (min, max) = GenerationRanges[generation - 1];
+            filtered = filtered.Where(pokemon => pokemon.Id >= min && pokemon.Id <= max);
         }
 
         var ordered = filtered.OrderBy(pokemon => pokemon.Id).ToList();
@@ -90,11 +110,11 @@ public sealed class PokemonService : IPokemonService
     }
 
     /// <summary>
-    /// A search term matches when it is a prefix of the name or of the id,
-    /// so "pika" finds "pikachu" and "25" finds #25.
+    /// A search term matches when it appears anywhere in the name or in the id,
+    /// so "chu" finds "pikachu" and "25" finds #25, #125, #225...
     /// </summary>
     private static bool Matches(PokemonSummary pokemon, string search) =>
-        pokemon.Name.StartsWith(search, StringComparison.OrdinalIgnoreCase)
+        pokemon.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
         || pokemon.Id.ToString(System.Globalization.CultureInfo.InvariantCulture)
-            .StartsWith(search, StringComparison.Ordinal);
+            .Contains(search, StringComparison.Ordinal);
 }

@@ -59,29 +59,71 @@ public sealed class PokemonServiceTests
     }
 
     [Fact]
-    public async Task GetPokemonPageAsync_MatchesTheNamePrefix()
+    public async Task GetPokemonPageAsync_MatchesAnywhereInTheName()
     {
         var (service, _) = CreateService();
 
         var page = await service.GetPokemonPageAsync(
-            new PokemonQuery { Search = "pika" },
+            new PokemonQuery { Search = "chu" },
             CancellationToken.None);
 
-        Assert.Equal(1, page.TotalItems);
-        Assert.Equal("pikachu", Assert.Single(page.Items).Name);
+        Assert.Equal(2, page.TotalItems);
+        Assert.Equal(new[] { "pikachu", "raichu" }, page.Items.Select(item => item.Name));
     }
 
     [Fact]
-    public async Task GetPokemonPageAsync_MatchesTheIdPrefix()
+    public async Task GetPokemonPageAsync_MatchesTheMiddleOfTheName()
     {
         var (service, _) = CreateService();
 
         var page = await service.GetPokemonPageAsync(
-            new PokemonQuery { Search = "25" },
+            new PokemonQuery { Search = "man" },
             CancellationToken.None);
 
         Assert.Equal(1, page.TotalItems);
-        Assert.Equal(25, Assert.Single(page.Items).Id);
+        Assert.Equal("charmander", Assert.Single(page.Items).Name);
+    }
+
+    [Fact]
+    public async Task GetPokemonPageAsync_MatchesAnywhereInTheId()
+    {
+        var (service, _) = CreateService();
+
+        var page = await service.GetPokemonPageAsync(
+            new PokemonQuery { Search = "2" },
+            CancellationToken.None);
+
+        Assert.Equal(2, page.TotalItems);
+        Assert.Equal(new[] { 25, 26 }, page.Items.Select(item => item.Id));
+    }
+
+    [Fact]
+    public async Task GetPokemonPageAsync_FiltersByGeneration()
+    {
+        var (service, _) = CreateService();
+
+        var generationOne = await service.GetPokemonPageAsync(
+            new PokemonQuery { Generation = 1 },
+            CancellationToken.None);
+
+        var generationTwo = await service.GetPokemonPageAsync(
+            new PokemonQuery { Generation = 2 },
+            CancellationToken.None);
+
+        Assert.Equal(5, generationOne.TotalItems);
+        Assert.Equal(0, generationTwo.TotalItems);
+    }
+
+    [Fact]
+    public async Task GetPokemonPageAsync_IgnoresOutOfRangeGenerations()
+    {
+        var (service, _) = CreateService();
+
+        var page = await service.GetPokemonPageAsync(
+            new PokemonQuery { Generation = 42 },
+            CancellationToken.None);
+
+        Assert.Equal(5, page.TotalItems);
     }
 
     [Fact]

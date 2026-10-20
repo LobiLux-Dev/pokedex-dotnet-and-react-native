@@ -170,6 +170,7 @@ export interface PokemonListParams {
   pageSize: number;
   search?: string;
   type?: string;
+  generation?: number;
 }
 
 export function fetchPokemonPage(
@@ -185,6 +186,9 @@ export function fetchPokemonPage(
   }
   if (params.type) {
     query.set('type', params.type);
+  }
+  if (params.generation) {
+    query.set('generation', String(params.generation));
   }
 
   return request<PagedResponse<PokemonSummary>>(`/api/v1/pokemon?${query.toString()}`);

@@ -47,7 +47,7 @@ La API queda escuchando en `http://0.0.0.0:5080` (ver `Properties/launchSettings
 
 | Método | Ruta | Descripción |
 | ------ | ---- | ----------- |
-| `GET`  | `/api/v1/pokemon?page=1&pageSize=20&search=&type=` | Listado paginado con búsqueda por nombre/número y filtro por tipo |
+| `GET`  | `/api/v1/pokemon?page=1&pageSize=20&search=&type=&generation=` | Listado paginado con búsqueda por nombre/número (coincidencia parcial) y filtros por tipo y generación |
 | `GET`  | `/api/v1/pokemon/{nameOrId}` | Ficha completa (stats, tipos, habilidades, sprites, movimientos, evolución) |
 | `GET`  | `/api/v1/pokemon/{nameOrId}/evolution` | Cadena evolutiva |
 | `GET`  | `/api/v1/types` | Tipos disponibles con el número de Pokémon de cada uno |
@@ -126,9 +126,11 @@ EXPO_PUBLIC_API_URL=http://192.168.1.50:5080
 
 ### Funcionalidades
 
-- **Pokédex**: listado paginado con scroll infinito, búsqueda por nombre o número y filtro por tipo.
-  El buscador y los filtros son una **barra fija** que no se pierde al hacer scroll; se filtran en la
-  misma pantalla contra la API y el chip activo se deselecciona al volver a pulsarlo.
+- **Pokédex**: listado paginado con scroll infinito, búsqueda por nombre o número con
+  **coincidencia parcial** (`"chu"` → Pikachu, Raichu, Pichu; `"saur"` → Bulbasaur, Ivysaur,
+  Venusaur) y filtros por tipo y generación. El buscador y los filtros son una **barra fija** que
+  no se pierde al hacer scroll; se filtran en la misma pantalla contra la API y el chip activo se
+  deselecciona al volver a pulsarlo.
 - **Ficha**: arte oficial, datos básicos, descripción (español si PokeAPI la tiene), estadísticas,
   habilidades, cadena evolutiva y movimientos agrupados por método de aprendizaje.
 - **Recetario**: 22 recetas inspiradas en Pokémon (ingredientes, pasos, dificultad, alérgenos y
@@ -205,8 +207,8 @@ dotnet test
 query, mapeo) y la API completa vía `WebApplicationFactory` (enrutado, serialización y
 `ProblemDetails`), con el repositorio de PokeAPI sustituido por un doble en memoria.
 
-> Con las secciones nuevas son **60 tests**: Recetario, Seafood, sus endpoints y el transporte
-> (compresión, caché y bloqueo sin red).
+> Con las secciones nuevas son **63 tests**: Recetario, Seafood, sus endpoints, el transporte
+> (compresión, caché) y la búsqueda por coincidencia parcial / filtro de generación.
 
 ---
 
