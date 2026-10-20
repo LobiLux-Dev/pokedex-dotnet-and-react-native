@@ -1,4 +1,4 @@
-import { useIsFocused, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -20,14 +20,13 @@ import type { PokemonSummary } from '@/lib/types';
 
 export default function PokemonListScreen() {
   const router = useRouter();
-  const isFocused = useIsFocused();
 
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
-  const typesQuery = usePokemonTypes(isFocused);
-  const listQuery = usePokemonList(debouncedSearch, selectedType, isFocused);
+  const typesQuery = usePokemonTypes();
+  const listQuery = usePokemonList(debouncedSearch, selectedType);
 
   const items = useMemo(
     () => listQuery.data?.pages.flatMap((page) => page.items) ?? [],
@@ -65,7 +64,7 @@ export default function PokemonListScreen() {
     router.push({ pathname: '/(pokedex)/pokemon/[name]', params: { name: pokemon.name } });
   };
 
-  const showInitialLoading = !isFocused || (listQuery.isPending && items.length === 0);
+  const showInitialLoading = listQuery.isPending && items.length === 0;
   const showError = listQuery.isError && items.length === 0;
   const isRefreshing = listQuery.isRefetching && items.length > 0;
 

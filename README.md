@@ -138,17 +138,19 @@ EXPO_PUBLIC_API_URL=http://192.168.1.50:5080
   sostenibilidad y tiempo de preparación.
 - **Favoritos**: se guardan en el dispositivo con `AsyncStorage` y aparecen en su propia pestaña.
 - **Sin red**: si el dispositivo arranca sin conexión, la app no deja entrar y muestra un mensaje de
-  error con opción de reintentar; se desbloquea sola en cuanto vuelve la conexión.
+  error con opción de reintentar; se desbloquea sola en cuanto vuelve la conexión. Si el estado de
+  red no se puede determinar, la app **abre igual** (nunca se queda esperando).
 
 Las cuatro secciones comparten el mismo componente de búsqueda y filtros (`CatalogToolbar`), y
 todos los datos se sirven desde la API .NET (nunca directamente de PokeAPI).
 
 ### Rendimiento del arranque
 
-- Las native tabs montan todas las pantallas a la vez, así que cada sección activa sus consultas
-  **solo cuando se visita por primera vez** (`useIsFocused`). Al arrancar se hacen 2 peticiones
-  (tipos + primera página) en lugar de 6.
-- La API precalienta sus cachés en segundo plano, de modo que esas peticiones responden en ~15 ms.
+- La API precalienta sus cachés en segundo plano, así que las peticiones del arranque responden
+  en ~15 ms y comprimidas.
+- Las consultas de las pestañas se lanzan al montar (React Query deduplica y cachea 5 min). Se
+  probó a diferirlas por pestaña, pero dependía del foco del navegador nativo y podía dejar la
+  pantalla cargando; se revirtió por fiabilidad.
 
 ### Datasets editoriales
 

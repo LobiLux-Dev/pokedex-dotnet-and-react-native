@@ -1,4 +1,4 @@
-import { useIsFocused, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -18,7 +18,6 @@ import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 
 export default function RecipesScreen() {
   const router = useRouter();
-  const isFocused = useIsFocused();
 
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string | null>(null);
@@ -26,11 +25,8 @@ export default function RecipesScreen() {
   const [maxMinutes, setMaxMinutes] = useState<number | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
-  const facets = useRecipeFacets(isFocused);
-  const query = useRecipes(
-    { search: debouncedSearch, category, difficulty, maxMinutes },
-    isFocused,
-  );
+  const facets = useRecipeFacets();
+  const query = useRecipes({ search: debouncedSearch, category, difficulty, maxMinutes });
 
   const items = useMemo(
     () => query.data?.pages.flatMap((page) => page.items) ?? [],
@@ -92,7 +88,7 @@ export default function RecipesScreen() {
     setMaxMinutes(null);
   };
 
-  const showInitialLoading = !isFocused || (query.isPending && items.length === 0);
+  const showInitialLoading = query.isPending && items.length === 0;
   const showError = query.isError && items.length === 0;
 
   return (

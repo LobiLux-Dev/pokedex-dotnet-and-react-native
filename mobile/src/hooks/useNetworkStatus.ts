@@ -1,20 +1,19 @@
 import NetInfo, { type NetInfoState } from '@react-native-community/netinfo';
 import { useCallback, useEffect, useState } from 'react';
+import { Platform } from 'react-native';
 
 import { setNetworkAvailable } from '@/lib/api';
 
 export interface NetworkStatus {
-  /** False until the first connectivity reading is available. */
-  isReady: boolean;
+  /** True only when the device explicitly reports that it has no connection. */
   isOffline: boolean;
-  /** True once the device has been online at least once in this session. */
+  /** True once a connection has been seen in this session. */
   hasBeenOnline: boolean;
   /** Re-checks the connectivity right now. */
   recheck: () => Promise<void>;
 }
 
 interface NetworkState {
-  isReady: boolean;
   isOffline: boolean;
   hasBeenOnline: boolean;
 }
@@ -25,41 +24,71 @@ function isOfflineState(state: NetInfoState): boolean {
   return state.isConnected === false;
 }
 
-function toNetworkState(state: NetInfoState, previous: NetworkState): NetworkState {
-  const isOffline = isOfflineState(state);
-
-  return {
-    isReady: true,
-    isOffline,
-    hasBeenOnline: previous.hasBeenOnline || !isOffline,
-  };
-}
-
 /**
- * Connectivity of the device. When there is no network the app shows a blocking
- * error screen instead of firing requests that are going to fail.
+ * Connectivity of the device.
+ *
+ * The default state is "online": if NetInfo is missing, slow or wrong, the app must still
+ * open. The offline screen is only shown when the device explicitly reports no connection,
+ * and only if the app has not been online yet in this session.
  */
 export function useNetworkStatus(): NetworkStatus {
   const [state, setState] = useState<NetworkState>({
-    isReady: false,
     isOffline: false,
     hasBeenOnline: false,
   });
 
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((netState) => {
-      setNetworkAvailable(!isOfflineState(netState));
-      setState((previous) => toNetworkState(netState, previous));
-    });
-
-    return unsubscribe;
+  const apply = useCallback((offline: boolean) => {
+    setNetworkAvailable(!offline);
+    setState((previous) => ({
+      isOffline: offline,
+      hasBeenOnline: previous.hasBeenOnline || !offline,
+    }));
   }, []);
+
+  useEffect(() => {
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = NetInfo.addEventListener((netState) => {
+        apply(isOfflineState(netState));
+      });
+    } catch {
+      // Without NetInfo the app must still work: assume there is a connection. The React
+      // state already defaults to online, so only the request guard needs updating.
+      setNetworkAvailable(true);
+    }
+
+    return () => {
+      unsubscribe?.();
+    };
+  }, [apply]);
+
+  // On web NetInfo listens to navigator.connection, which does not always fire on a plain
+  // network change; the browser events are the reliable fallback.
+  useEffect(() => {
+    if (Platform.OS !== 'web' || typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const handleChange = () => apply(window.navigator.onLine === false);
+
+    window.addEventListener('online', handleChange);
+    window.addEventListener('offline', handleChange);
+
+    return () => {
+      window.removeEventListener('online', handleChange);
+      window.removeEventListener('offline', handleChange);
+    };
+  }, [apply]);
 
   const recheck = useCallback(async () => {
-    const netState = await NetInfo.fetch();
-    setNetworkAvailable(!isOfflineState(netState));
-    setState((previous) => toNetworkState(netState, previous));
-  }, []);
+    try {
+      const netState = await NetInfo.fetch();
+      apply(isOfflineState(netState));
+    } catch {
+      apply(false);
+    }
+  }, [apply]);
 
   return { ...state, recheck };
 }

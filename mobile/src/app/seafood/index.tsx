@@ -1,4 +1,4 @@
-import { useIsFocused, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -18,7 +18,6 @@ import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 
 export default function SeafoodScreen() {
   const router = useRouter();
-  const isFocused = useIsFocused();
 
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string | null>(null);
@@ -26,11 +25,8 @@ export default function SeafoodScreen() {
   const [maxPrepMinutes, setMaxPrepMinutes] = useState<number | null>(null);
 
   const debouncedSearch = useDebouncedValue(search, 350);
-  const facets = useSeafoodFacets(isFocused);
-  const query = useSeafood(
-    { search: debouncedSearch, category, sustainability, maxPrepMinutes },
-    isFocused,
-  );
+  const facets = useSeafoodFacets();
+  const query = useSeafood({ search: debouncedSearch, category, sustainability, maxPrepMinutes });
 
   const items = useMemo(
     () => query.data?.pages.flatMap((page) => page.items) ?? [],
@@ -95,7 +91,7 @@ export default function SeafoodScreen() {
     setMaxPrepMinutes(null);
   };
 
-  const showInitialLoading = !isFocused || (query.isPending && items.length === 0);
+  const showInitialLoading = query.isPending && items.length === 0;
   const showError = query.isError && items.length === 0;
 
   return (

@@ -4,7 +4,7 @@ import { fetchPokemonDetail, fetchPokemonPage, fetchPokemonTypes } from '@/lib/a
 
 const PAGE_SIZE = 24;
 
-export function usePokemonList(search: string, type: string | null, enabled = true) {
+export function usePokemonList(search: string, type: string | null) {
   return useInfiniteQuery({
     queryKey: ['pokemon', 'list', search, type],
     initialPageParam: 1,
@@ -17,7 +17,6 @@ export function usePokemonList(search: string, type: string | null, enabled = tr
       }),
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.page + 1 : undefined,
-    enabled,
   });
 }
 
@@ -29,11 +28,10 @@ export function usePokemonDetail(nameOrId: string | undefined) {
   });
 }
 
-export function usePokemonTypes(enabled = true) {
+export function usePokemonTypes() {
   return useQuery({
     queryKey: ['pokemon', 'types'],
     queryFn: fetchPokemonTypes,
     staleTime: 60 * 60 * 1000,
-    enabled,
   });
 }
