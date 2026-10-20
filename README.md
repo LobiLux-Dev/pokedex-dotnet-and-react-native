@@ -99,6 +99,10 @@ npx expo start
 
 Elige plataforma con `npx expo start --android | --ios | --web`, o pulsa `a` / `i` / `w` en la terminal.
 
+> Si publicas la versión web (`npx expo export --platform web`), el servidor estático debe
+> reescribir las rutas profundas a `index.html` (regla SPA habitual) para que el enrutado del
+> lado del cliente funcione.
+
 ### Apuntar la app a la API
 
 La app **detecta sola** el host correcto (probando `/health` en este orden):
