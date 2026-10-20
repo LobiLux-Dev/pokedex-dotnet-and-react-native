@@ -1,0 +1,25 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+.vscode/
+*.swp
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+*.tsbuildinfo
+npm-debug.*
+yarn-error.*
+
+# Entorno
+.env
+.env*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
