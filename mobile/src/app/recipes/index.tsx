@@ -131,6 +131,7 @@ export default function RecipesScreen() {
           data={items}
           keyExtractor={(item) => String(item.id)}
           contentContainerStyle={styles.listContent}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
           renderItem={({ item }) => (
             <RecipeCard
               recipe={item}
@@ -187,6 +188,9 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
+  },
+  separator: {
+    height: spacing.lg,
   },
   listContent: {
     paddingHorizontal: spacing.lg,

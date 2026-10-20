@@ -237,12 +237,13 @@ const styles = StyleSheet.create({
     color: palette.primaryDark,
   },
   ingredients: {
-    gap: spacing.sm,
+    gap: spacing.md,
   },
   ingredient: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
+    paddingVertical: 2,
   },
   quantityBox: {
     minWidth: 74,
